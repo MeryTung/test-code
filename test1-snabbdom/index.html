@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <div class="output"><video controls="" src="https://interactive-examples.mdn.mozilla.net/media/cc0-videos/friday.mp4">
+        <track default="" kind="captions" srclang="en" src="./friday.vtt">
+        Sorry, your browser doesn't support embedded videos.
+    </video>
+    </div> -->
+    <div id="container"></div>
+    <button id="btn">改变</button>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/h.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/snabbdom-class.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/snabbdom-eventlisteners.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/snabbdom-props.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/snabbdom-style.js"></script>
+    <script src="https://cdn.bootcdn.net/ajax/libs/snabbdom/0.7.4/snabbdom.js"></script>
+    <script>
+        const snabbdom = window.snabbdom;
+        const patch = snabbdom.init([
+            // 通过传入模块初始化 patch 函数
+            snabbdom_class, // 开启 classes 功能
+            snabbdom_props, // 支持传入 props
+            snabbdom_style, // 支持内联样式同时支持动画
+            snabbdom_eventlisteners, // 添加事件监听
+        ]);
+        const h = snabbdom.h
+        const container = document.getElementById("container");
+        const btn = document.getElementById('btn')
+        let vnode = h('div#container.',{},h('ul#list',{},[
+           h('li.item',{},'第一项'),
+           h('li.item',{},'第二项')
+        ]))
+        patch(container, vnode);
+        btn.addEventListener("click",function(e) {
+            let newVnode = h('div#container.',{}, h('ul#list',{},[
+           h('li.item',{},'第一项'),
+           h('li.item',{},'第二项32333'),
+           h('li.item',{},'第三项')
+        ]))
+        patch(vnode, newVnode);
+        vnode = newVnode
+        })
+    </script>
+</body>
+</html>

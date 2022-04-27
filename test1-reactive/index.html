@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // var obj = {a:1,b:2,c:3}
+        // var arr = [1,2,3,4,5,6]
+        // for(let item in obj){
+        //     console.log('obj',item)
+        // }
+        // for(let item of arr){
+        //     console.log('arr',item)
+        // }
+        // let price = 5;
+        // let quantity = 2;
+        // let total = 0;
+        // let effect = () => { total = price * quantity}
+        // let dep = new Set();
+        // function track(){
+        //     dep.add(effect);
+        // }
+        // function trigger(){
+        //     dep.forEach(effect => effect())
+        // }
+        // track();
+        // effect();
+        // let product = reactive({ price: 5, quantity: 2});
+        // let  user = { fristName: 'zhao', lastName: 'you ting'}
+        // const depMap = new Map();
+        // function track(key){
+        //     let dep = depMap.get(key)
+        //     if(!dep){
+        //         depMap.set(key,(dep = new Set()));
+        //     }
+        //     dep.add(effect)
+        // }
+
+        // function trigger(key){
+        //     let dep = depMap.get(key)
+        //     dep.forEach(effect => effect())
+        // }
+     
+        // track('quantity')
+        // effect();
+
+        // let map = new Map();
+        // map.set({bar:'hello'},200)
+        // map.set('foo','JACK')
+        // map.set('name','Mark')
+        // map.set('love','赵又廷')
+        // for(let item of map){
+        //     console.log(item)
+        // }
+    
+        const targetMap = new WeakMap();
+        let total = 0;
+        let activeEffect = null
+    
+        function track(target,key){
+            if(activeEffect){
+                let depsMap = targetMap.get(key)
+            if(!depsMap){
+              targetMap.set(target,(depsMap = new Map()))
+            }
+            let dep = depsMap.get(key)
+            if(!dep){
+                depsMap.set(key,(dep = new Set()))
+            }
+            dep.add(activeEffect)
+            }
+           
+            
+        }
+
+        function trigger(target,key){
+            const depsMap = targetMap.get(target)
+            if(!depsMap){ return }
+            let dep = depsMap.get(key)
+            if(dep){
+                dep.forEach(effect => {effect()} )
+            }
+        }
+        
+        function effect(eff){
+            activeEffect = eff;
+            activeEffect()
+            activeEffect = null
+        }
+
+        function reactive(target){
+            let hander = {
+                get(target,key,receiver){
+                    let result = Reflect.get(target,key,receiver)
+                    track(target,key)
+                    return result
+                }, 
+                set(target,key,value,receiver){
+                let oldValue =target[key]
+                let result = Reflect.set(target,key,value,receiver)
+                if(oldValue != value){
+                    trigger(target,key)
+                }
+                return  result
+                }
+            }
+            return  new Proxy(target,hander)
+        }
+        // track(product,'quantity')
+        function ref(raw){
+            let r = {
+                get value(){
+                    track(r,'value');
+                    return raw
+                },
+                set value(newVal){
+                    if(raw !==newVal){
+                        raw = newVal;
+                    }
+                    
+                    trigger(r,'value')
+                }
+            }
+            return r
+        }
+        let product = reactive( {price: 5, quantity: 2});
+        let salePrice = ref(0)
+        // let  user = { fristName: 'zhao', lastName: 'you ting'}
+        effect( () => { salePrice.value = product.price * 0.5} )
+        effect( ()=> { total = salePrice.value * product.quantity })
+        
+
+      
+        // const effect = () => { total = product.price * product.quantity }
+        // effect();
+        console.log(`${total},促销 ${salePrice.value}`);
+        product.quantity = 5;
+        console.log(`${total},促销 ${salePrice.value}`);
+
+        // let  user = {
+        //     fristName: 'zhao', 
+        //     lastName: 'you ting',
+        //     get fullName(){
+        //         return `${this.fristName } ${this.lastName}`
+        //     }, 
+        //     set fullName(value){
+        //         [this.firstName, this.lastName] = value.split(' ')
+        //     }
+        // }
+        // console.log(`Name is ${user.fullName}`);
+        // user.fullName = 'ye hua';
+        // console.log(`Name is ${user.fullName}`);
+        function r(){
+
+        }
+        // trigger(product,'quantity');
+        // console.log(total)
+       
+    </script>
+</body>
+</html>

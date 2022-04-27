@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script type="text/javascript">
+        // let product = { price:5, quantity:2 }
+        // console.log('quantity',product.quantity)
+        // console.log('quantity',product['quantity'])
+        // console.log('quantity',Reflect.get(product,'quantity'))
+        function reactive(target){
+            let hander = {
+                get(target,key,receiver){
+                console.log('get')
+                return Reflect.get(target,key,receiver)
+            },
+            set(target,key,value,receiver){
+                console.log('set')
+             return Reflect.set(target,key,value,receiver)
+            }
+            }
+            return  new Proxy(target,hander)
+        }
+        // proxiedProduct.quantity = 5
+       let product =  reactive( {price:5,quantity:2} )
+       product.quantity = 4
+       console.log(product.quantity)
+        // console.log(proxiedProduct.quantity)
+    </script>
+</body>
+</html>
