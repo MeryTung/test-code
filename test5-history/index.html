@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2>Vue路由中history模式的实现</h2>
+    <button class="btn">改变history的值</button>
+    <button class="btn2">继续改变history的值</button>
+    <script>
+        document.addEventListener("DOMContentLoaded",function(){
+            console.log('url',location.pathname)
+        })
+        let btn = document.querySelector('.btn')
+        let btn2 = document.querySelector('.btn2')
+        btn.addEventListener('click',function(){
+            const state = {name:'url'}
+            history.pushState(state,'','user.html')
+            console.log('改变了',history.state)
+        })
+        btn2.addEventListener('click',function(){
+            const state = {name:'img'}
+            history.replaceState(state,'','img')
+        })
+        //onpopstate 监听浏览器前进后退
+        window.onpopstate = (e)=> console.log('location:'+location.pathname)
+    </script>
+</body>
+</html>

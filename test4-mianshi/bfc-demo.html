@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style type="text/css">
+ .container {
+     background-color: #ccc
+ }
+ img{
+     width:300px;float:left;
+ }
+
+ .bfc{ overflow: hidden; }
+ </style>
+<body>
+   <!-- <div class="container">
+       <img src="./xiaomei1.jpg" alt="">  <!----脱离了文档流-，我们需要做块格式化上下文处理-->
+       <!-- <p class="bfc">ali,niang yao zou le </p>
+   </div>  --> 
+   <script>
+       var arr = [1,2,3,4,32,4,2,3,5,1]
+       let temp = []
+    //    function ArrayIsUnique(){
+    //     for(var i = 0; i < arr.length; i++) {
+    //        for(var j=i+1;j<arr.length;j++){
+    //            if(arr[j]==arr[i]){
+    //                arr.splice(j,1)
+    //            }
+    //        }
+    //    }
+    //    return arr
+    //    }
+
+    //    function ArrayIsUnique2(){
+    //        if(!Array.isArray(arr)) return ;
+    //        const map = new Set(arr)
+    //       return  Array.from(map)
+    //    }
+        
+    //    function ArrayIsUnique3(){
+    //        const map = new Map();
+    //        arr.forEach(item => map.set(item,item))
+    //        return Array.from(map.values())
+    //    }
+    //    function ArrayIsUnique4(){
+    //        if(!Array.isArray(arr)) return ;
+    //        //arr.sort()
+    //        for(let i=0;i<arr.length;i++) {
+    //            if(arr[i] == arr[i+1]){
+    //                arr.splice(i,1)
+    //            }
+    //        }
+    //        return arr
+    //    }
+
+    //    function ArrayIsUnique5(){
+    //     if(!Array.isArray(arr)) return ;
+    //     const temp = [];
+    //     arr.forEach((item)=>{
+    //         if(arr.indexOf(item)!==-1){
+    //             temp.push(item)
+    //         }
+    //     })
+    //     return temp
+    //    }
+    //    //includes 是否包含
+    //    function ArrayIsUnique6(){
+    //        let temp = [];
+    //        arr.forEach((item)=>{
+    //            if(!temp.includes(item)){
+    //                temp.push(item)
+    //            }
+    //        })
+    //     return temp
+    //    }
+
+       function ArrayIsUnique7(array){
+        //    let array = arr.filter(item=>item)
+        //    let temp = []
+        //    arr.forEach(item=>{
+        //        if(array.indexOf(item)!==-1){
+        //         temp.push(item)
+        //        }
+        //    })
+        // let array = arr.map(item=>item)
+        // array.forEach((item)=>{
+        //     arr = arr.filter(i=>item !==i)
+        //    // arr.push(item)
+        // })
+        //    return arr
+         let arr = []
+         array.reduce((prev,current)=> {
+              if(!arr.includes(current)){
+                arr.push(current)
+              }
+          })
+          return temp
+       }
+       
+       function bar(){
+           console.log(this)
+       }
+
+    //    let arr1 = ArrayIsUnique()
+    //    let arr2 = ArrayIsUnique2()
+    //    let arr3 = ArrayIsUnique3()
+    //    let arr4 = ArrayIsUnique4()
+    //    let arr5 = ArrayIsUnique5()
+    //    let arr6 = ArrayIsUnique6()
+    //    let arr7 = ArrayIsUnique7()
+    //    console.log(arr1)
+    //    console.log(arr2)
+    //    console.log(arr3)
+    //    console.log(arr4)
+    //    console.log(arr5)
+    //    console.log('arr6',arr6)
+    //    console.log('arr7',arr7)
+   </script>
+</body>
+</html>
