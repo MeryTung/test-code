@@ -65,12 +65,19 @@ const store = createStore({
         }
 })
 
+// store.registerModule('myModule',{
+//     state(){
+//         return {
+//             count:40
+//         }
+//     }
+// },{
+//     preserveState: true
+// })
 store.registerModule('myModule',{
-    state(){
-        return {
-            count:40
-        }
-    }
+    state:()=>({
+        count:1   //模块重用，用函数声明不会被相互模块污染
+    })
 })
 
 export default store
