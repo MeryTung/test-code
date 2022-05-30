@@ -65,4 +65,12 @@ const store = createStore({
         }
 })
 
+store.registerModule('myModule',{
+    state(){
+        return {
+            count:40
+        }
+    }
+})
+
 export default store

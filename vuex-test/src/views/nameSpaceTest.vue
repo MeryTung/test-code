@@ -7,12 +7,17 @@
 </template>
 
 <script>
-
+//import { mapState } from 'vuex'
+import { createNamespacedHelpers } from 'vuex'
+const { mapState } = createNamespacedHelpers('a/')  //创建a命名空间的辅助函数
 export default {
    computed:{
-       count(){
-           return this.$store.state
-       }
+       ...mapState({
+           count:state=>state
+       })
+    //    count(){
+    //        return this.$store.state
+    //    }
    },
    methods:{
        addCount(){
@@ -27,6 +32,9 @@ export default {
        }
    },
    mounted(){
+       console.log(this.$store.state)
+       //嵌套模块应该以数组形式传递给 registerModule 和 hasModule，而不是以路径字符串的形式传递给 module。
+       console.log(this.$store.hasModule(['a']))
       // console.log(this.$store.dispatch('someAction',{amount:5}))
    }
 }
