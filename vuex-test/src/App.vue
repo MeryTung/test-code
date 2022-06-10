@@ -1,20 +1,23 @@
 <template>
   <!-- <IndexTest /> -->
   <!-- <moduleTest /> -->
-  <nameSpaceTest />
+  <!-- <nameSpaceTest /> -->
+  <componentTest />
 </template>
 
 <script>
 // import IndexTest from './views/IndexTest.vue'
 // import moduleTest from './views/moduleTest.vue'
-import nameSpaceTest from './views/nameSpaceTest.vue'
+// import nameSpaceTest from './views/nameSpaceTest.vue'
+import componentTest from './views/componentTest.vue'
 
 export default {
   name: 'App',
   components: {
     // IndexTest
     // moduleTest
-    nameSpaceTest
+    // nameSpaceTest
+    componentTest
   }
 }
 </script>

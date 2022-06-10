@@ -42,11 +42,15 @@ const moduleB = {
     }
 
 }
+const moduleC = {
+    namespaced: true
+}
 const store = createStore({
         namespaced: true,
          modules:{
             a:moduleA,
-            b:moduleB
+            b:moduleB,
+            nested:moduleC
         },
         state:()=> {
             return {
@@ -74,10 +78,28 @@ const store = createStore({
 // },{
 //     preserveState: true
 // })
-store.registerModule('myModule',{
-    state:()=>({
-        count:1   //模块重用，用函数声明不会被相互模块污染
-    })
-})
+// store.registerModule('myModule',{
+//     state:()=>({
+//         count:1   //模块重用，用函数声明不会被相互模块污染
+//     })
+// })
 
+//注册嵌套式模块
+store.registerModule(['nested', 'myModule'], {
+    namespaced: true,
+    state: () => ({
+        count: 0
+      }),
+      mutations: {
+        increment2 (state) {
+          // 这里的 `state` 对象是模块的局部状态
+          state.count++
+        }
+      },
+      getters: {
+        doubleCount (state) {
+          return state.count * 2
+        }
+      }
+})
 export default store
