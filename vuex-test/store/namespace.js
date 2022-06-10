@@ -83,6 +83,12 @@ const store = createStore({
 //         count:1   //模块重用，用函数声明不会被相互模块污染
 //     })
 // })
+store.registerModule('myModuleC',{
+    namespaced: true,
+    state:{
+        count:10
+    }
+})
 
 //注册嵌套式模块
 store.registerModule(['nested', 'myModule'], {
@@ -102,4 +108,8 @@ store.registerModule(['nested', 'myModule'], {
         }
       }
 })
+
+//不能删除store创建的模块
+store.unregisterModule('myModuleC')
+console.log('为false，则没有创建对应的模块',store.hasModule(['nested', 'myModule']))
 export default store

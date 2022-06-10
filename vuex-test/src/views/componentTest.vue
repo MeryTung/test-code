@@ -16,7 +16,7 @@ export default {
         //console.log(store)
       }
       onMounted(()=>{
-         // console.log(store.state)
+         console.log(store)
       })
       return {
          count:computed(()=>store.state),
