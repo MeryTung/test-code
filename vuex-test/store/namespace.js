@@ -2,14 +2,13 @@
 
 
 import { createStore } from 'vuex'
+import _ from 'lodash'
 
 const moduleA = {
     namespaced: true,
-    state(){
-        return {
-            count:10
-        }
-    },
+    state: ()=>({
+        count:10
+    }),
     mutations:{
         increment(state,payload){
             return state.count += payload.amount
@@ -45,7 +44,18 @@ const moduleB = {
 const moduleC = {
     namespaced: true
 }
+
+const myPluginsWithSnapshot = (store) => {
+    let preState = _.cloneDeep(store.state)
+    store.subscribe((mutations,state)=> {
+        let nextState = _.cloneDeep(state)
+        if(preState == nextState){
+            console.log('我使用了插件')
+        }
+    })
+}
 const store = createStore({
+   // strict: true,
         namespaced: true,
          modules:{
             a:moduleA,
@@ -66,7 +76,8 @@ const store = createStore({
             increment(state,payload){
                 return state.count += payload.amount
             }
-        }
+        },
+        plugins:process.env.NODE_ENV !== 'production'?[myPluginsWithSnapshot]:[]
 })
 
 // store.registerModule('myModule',{
@@ -86,7 +97,15 @@ const store = createStore({
 store.registerModule('myModuleC',{
     namespaced: true,
     state:{
-        count:10
+        count:10,
+        obj:{
+            message:'123'
+        }
+    },
+    mutations:{
+        updateMessage(state,payload){
+            return state.obj.message = payload
+        }
     }
 })
 
@@ -109,7 +128,15 @@ store.registerModule(['nested', 'myModule'], {
       }
 })
 
+//保留state关键词，state不会被覆盖
+store.registerModule('a',module,{
+    preserveState: true,
+    state:{
+        count:'123'
+    }
+})
+
 //不能删除store创建的模块
-store.unregisterModule('myModuleC')
+//store.unregisterModule('myModuleC')
 console.log('为false，则没有创建对应的模块',store.hasModule(['nested', 'myModule']))
 export default store
