@@ -1,0 +1,23 @@
+{
+  "name": "study-mocha",
+  "version": "0.0.1",
+  "description": "study mocha",
+  "main": "app.js",
+  "scripts": {
+    "test": "./node_modules/mocha/bin/_mocha"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@babel/core": "^7.18.2",
+    "@babel/register": "^7.17.7",
+    "chai": "^4.3.6",
+    "coffeescript": "^2.7.0",
+    "mocha": "^10.0.0",
+    "should": "^13.2.3"
+  },
+  "dependencies": {
+    "@babel/polyfill": "^7.12.1",
+    "@babel/preset-env": "^7.18.2"
+  }
+}
