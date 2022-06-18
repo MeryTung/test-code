@@ -3,7 +3,8 @@
   <!-- <moduleTest /> -->
   <!-- <nameSpaceTest /> -->
   <!-- <componentTest /> -->
-  <CounterControls />
+  <!-- <CounterControls /> -->
+  <TestControl />
 </template>
 
 <script>
@@ -11,7 +12,8 @@
 // import moduleTest from './views/moduleTest.vue'
 // import nameSpaceTest from './views/nameSpaceTest.vue'
 // import componentTest from './views/componentTest.vue'
-import CounterControls from './views/CounterControls.vue'
+// import CounterControls from './views/CounterControls.vue'
+import  TestControl from './views/TestControl.vue'
 
 export default {
   name: 'App',
@@ -20,7 +22,8 @@ export default {
     // moduleTest
     // nameSpaceTest
     // componentTest
-    CounterControls,
+    // CounterControls,
+    TestControl
   }
 }
 </script>

@@ -1,9 +1,13 @@
-export const increment = state => {
-  state.count++
-  state.history.push('increment')
-}
+// export const increment = state => {
+//   state.count++
+//   state.history.push('increment')
+// }
 
-export const decrement = state => {
-  state.count--
-  state.history.push('decrement')
+// export const decrement = state => {
+//   state.count--
+//   state.history.push('decrement')
+// }
+
+export const mutations = {
+  increment: state => state.count++
 }
