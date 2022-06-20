@@ -10,7 +10,7 @@ const First = () => import(/*webpackChunkName*/'@/views/First.vue')
 const Second = () => import(/*webpackChunkName*/'@/views/Second')
 const Third = () => import(/*webpackChunkName*/'@/views/Third.vue')
 const  UserDetails = () => import(/*webpackChunkName*/'@/views/UserDetails.vue')
-
+const Login = () => import(/*webpackChunkName*/'@/views/Login.vue')
 
 
 function removeQuery(to){
@@ -34,18 +34,19 @@ const routes = [
     //     //相对重定向
     //     return '/'
     // }},
+    {path:'/login',name:'login',component:Login},
     {path:'/about/:id',name:'about',component: About,
     // beforeEnter:(to,from)=> {
     //     console.log('路由独享的前卫,只有在进入路由触发，不会在params,query,hash改变时触发，只有在不同的路由导航时，才会被触发。')
     // },
-    beforeEnter:[removeQuery],
+    // beforeEnter:[removeQuery],
     children:
      [
-        {path:'',component:AboutChild},
+        {path:'child',component:AboutChild,meta:{requiredAuth:true}},
         {path:'profile',component: Profile}
       ]
     },
-    {path:'/user',component:UserDetails}
+    {path:'/user/:name',name:'user',component:UserDetails}
 ]
 
 const router = createRouter({
@@ -60,7 +61,11 @@ const router = createRouter({
     // }
 })
 
-
+router.beforeEach((to,from)=> {
+    if(to.meta.requiredAuth){
+        return {path:'/login',query: { redirect: to.fullPath }}
+    }
+})
 
 // router.beforeEach((to,form)=>{
 //    console.log('全局前置守卫',to)

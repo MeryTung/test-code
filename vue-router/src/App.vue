@@ -1,10 +1,11 @@
 <template>
  
   <img alt="Vue logo" src="./assets/logo.png" />
-   <router-link to="/">Home</router-link> |
-   <router-link to="/user">User</router-link> |
-   <router-link to="/about/1">About</router-link> |
-   <router-link to="/about/2">About 2</router-link>
+   <AppLink to="/">Home</AppLink> |
+   <AppLink to="/user/yehua">User</AppLink> |
+   <AppLink to="/about/1/child">About</AppLink> |
+   <AppLink to="/about/2">About 2</AppLink> |
+   <AppLink to="https://www.baidu.com">百度</AppLink> |
    <router-view />
    <router-view name="First"></router-view> 
    <router-view name="Second"></router-view> 
