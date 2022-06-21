@@ -1,6 +1,6 @@
 import { createApp } from 'vue'
 import App from './App.vue'
-import router from '@/router'
+import router from '@/router/transition.js'
 import AppLink from '@/components/AppLink.vue'
 
 createApp(App)
