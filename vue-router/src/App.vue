@@ -1,5 +1,5 @@
 <template>
- 
+ <div>
   <img alt="Vue logo" src="./assets/logo.png" />
    <!-- <AppLink to="/">Home</AppLink> |
    <AppLink to="/user/yehua">User</AppLink> |
@@ -28,10 +28,13 @@
             <component :is="Component" />
         </transition>
     </router-view>
+    <!-- <router-view /> -->
+ </div>
+
 </template> 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
 }
 </script>
 

@@ -9,7 +9,11 @@ const  routes = [
     // {path:'/',component:Custom,meta:{transition:'slide-left'}},
     // {path:'/other',component:Other,meta:{transition:'slide-right'}},
     {path:'/',component:Custom},
-    {path:'/other',component:Other}
+    {path:'/other',component:Other,
+      beforeEnter:()=>{
+        return false
+      } 
+    }
 
 ]
 
