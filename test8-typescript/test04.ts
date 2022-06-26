@@ -1,4 +1,4 @@
-//继承接口
+// 继承接口
 
 // interface Shape {
 //     Color: string
