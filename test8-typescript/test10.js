@@ -8,21 +8,6 @@
 //         return 'Hello ' + this.greeting;
 //     }
 // }
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 // let greete = new Greeter("typescript");
 // console.log(greete.greet())
 //类继承
@@ -116,27 +101,58 @@ var __extends = (this && this.__extends) || (function () {
 // let father = new Father('hello typecsript')
 // father.name = 'OMG' //无法分配到”name“，因为它=是只读属性
 // console.log(father)
+//参数属性：参数属性通过给构造函数参数添加一个访问限定符来声明。 使用private限定一个参数属性会声明并初始化一个私有成员；对于public和protected来说也是一样。
+// class Father {
+//     //构造函数定义的private name，是参数属性。舍弃了theName，仅在构造函数里使用private name: string参数来创建和初始化name成员。 我们把声明和赋值合并至一处。
+//         constructor(private name: string){
+//         }
+//         move(distanceInMeters:number){
+//             return `${this.name} moved ${distanceInMeters}`
+//         }
+// }
+// class SonOne extends Father {
+//       constructor(name: string){
+//         super(name)
+//       }
+//       move(distanceInMeters = 20){
+//         return `SonOne -- ${distanceInMeters} `
+//       }
+// }
+// let father = new Father('Mark')
+// let son = new SonOne('son')
+// console.log(father.move(30))
+// console.log(son.move())
+//存取器 get set
+// class Father {
+//     fullName: string
+// }
+// let father = new Father()
+// father.fullName = 'Mark Chao'
+// if(father.fullName){
+//     console.log(father.fullName)
+// }
+//改写成存取器
+var fullNameMaxLength = 10;
 var Father = /** @class */ (function () {
-    function Father(name) {
-        this.name = name;
+    function Father() {
     }
-    Father.prototype.move = function (distanceInMeters) {
-        return "".concat(this.name, " moved ").concat(distanceInMeters);
-    };
+    Object.defineProperty(Father.prototype, "fullName", {
+        get: function () {
+            return this._fullName;
+        },
+        set: function (newName) {
+            if (newName && newName.length > fullNameMaxLength) {
+                throw new Error("fullName has a max length of" + fullNameMaxLength);
+            }
+            this._fullName = newName;
+        },
+        enumerable: false,
+        configurable: true
+    });
     return Father;
 }());
-var SonOne = /** @class */ (function (_super) {
-    __extends(SonOne, _super);
-    function SonOne(name) {
-        return _super.call(this, name) || this;
-    }
-    SonOne.prototype.move = function (distanceInMeters) {
-        if (distanceInMeters === void 0) { distanceInMeters = 20; }
-        return "SonOne -- ".concat(distanceInMeters, " ");
-    };
-    return SonOne;
-}(Father));
-var father = new Father('Mark');
-var son = new SonOne('son');
-console.log(son.move());
-console.log(father.move(30));
+var father = new Father();
+father.fullName = 'Mark Chao';
+if (father.fullName) {
+    console.log(father.fullName);
+}

@@ -125,28 +125,64 @@
 // console.log(father)
 
 //参数属性：参数属性通过给构造函数参数添加一个访问限定符来声明。 使用private限定一个参数属性会声明并初始化一个私有成员；对于public和protected来说也是一样。
-class Father {
-    //构造函数定义的private name，是参数属性。舍弃了theName，仅在构造函数里使用private name: string参数来创建和初始化name成员。 我们把声明和赋值合并至一处。
-        constructor(private name: string){
+// class Father {
+//     //构造函数定义的private name，是参数属性。舍弃了theName，仅在构造函数里使用private name: string参数来创建和初始化name成员。 我们把声明和赋值合并至一处。
+//         constructor(private name: string){
     
+//         }
+//         move(distanceInMeters:number){
+//             return `${this.name} moved ${distanceInMeters}`
+//         }
+// }
+
+// class SonOne extends Father {
+//       constructor(name: string){
+//         super(name)
+//       }
+//       move(distanceInMeters = 20){
+//         return `SonOne -- ${distanceInMeters} `
+//       }
+// }
+
+// let father = new Father('Mark')
+// let son = new SonOne('son')
+// console.log(father.move(30))
+// console.log(son.move())
+
+
+//存取器 get set
+
+// class Father {
+//     fullName: string
+// }
+
+// let father = new Father()
+// father.fullName = 'Mark Chao'
+// if(father.fullName){
+//     console.log(father.fullName)
+// }
+
+
+
+//改写成存取器
+let fullNameMaxLength = 10
+class Father {
+    private _fullName: string;
+    get fullName(): string  { 
+         //如果提示”访问器仅在面向ES5和更高版本时可用 “，就tsc test10.ts --t es5  或在tsconfig.ts加上 "target": "es5"属性
+        return this._fullName
+    }
+    set fullName(newName:string){
+        if(newName && newName.length > fullNameMaxLength){
+            throw new Error("fullName has a max length of" +  fullNameMaxLength )
         }
-        move(distanceInMeters:number){
-            return `${this.name} moved ${distanceInMeters}`
-        }
+        this._fullName =newName
+    }
 }
 
-class SonOne extends Father {
-      constructor(name: string){
-        super(name)
-      }
-      move(distanceInMeters = 20){
-        return `SonOne -- ${distanceInMeters} `
-      }
+let father = new Father()
+father.fullName = 'Mark Chao'
+if(father.fullName){
+    console.log(father.fullName)
 }
-
-let father = new Father('Mark')
-let son = new SonOne('son')
-console.log(father.move(30))
-console.log(son.move())
-
 
