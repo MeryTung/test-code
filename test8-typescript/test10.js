@@ -8,6 +8,21 @@
 //         return 'Hello ' + this.greeting;
 //     }
 // }
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
 // let greete = new Greeter("typescript");
 // console.log(greete.greet())
 //类继承
@@ -152,17 +167,43 @@
 //     console.log(father.fullName)
 // }
 //静态属性
-var Gird = /** @class */ (function () {
-    function Gird(scale) {
-        this.scale = scale;
+//  class Gird {
+//     static origin = {x: 0,y:0}
+//     calculateDistanceFromOrigin(point:{x:number,y:number}){
+//         let xDist = (point.x - Gird.origin.x)
+//         let yDist = (point.y - Gird.origin.y)
+//         return Math.sqrt(xDist * xDist + yDist * yDist) /this.scale
+//     }
+//     constructor(public scale:number){  //public scale参数属性
+//     }
+//  }
+//  let gird = new Gird(1.0)
+//  console.log(gird.calculateDistanceFromOrigin({x:10,y:10}))
+//抽象类
+//  abstract class Father {
+//     abstract name: string;
+//     move():void {
+//         console.log('这是一个抽象类')
+//     }
+//  }
+var Father = /** @class */ (function () {
+    function Father(name) {
+        this.name = name;
     }
-    Gird.prototype.calculateDistanceFromOrigin = function (point) {
-        var xDist = (point.x - Gird.origin.x);
-        var yDist = (point.y - Gird.origin.y);
-        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
-    };
-    Gird.origin = { x: 0, y: 0 };
-    return Gird;
+    Father.prototype.printName = function () { console.log("".concat(this.name)); };
+    return Father;
 }());
-var gird = new Gird(1.0);
-console.log(gird.calculateDistanceFromOrigin({ x: 10, y: 10 }));
+var SonOne = /** @class */ (function (_super) {
+    __extends(SonOne, _super);
+    function SonOne(name) {
+        var _this = _super.call(this, name) || this;
+        _this.name = name;
+        return _this;
+    }
+    SonOne.prototype.printName = function () { console.log(this.name); };
+    SonOne.prototype.printMeeting = function () { console.log('The Accounting Department meets each Monday at 10am'); };
+    return SonOne;
+}(Father));
+var son = new SonOne('Mark Chao');
+son.printName();
+son.printMeeting();

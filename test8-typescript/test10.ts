@@ -189,17 +189,45 @@
 
 
 //静态属性
- class Gird {
-    static origin = {x: 0,y:0}
-    calculateDistanceFromOrigin(point:{x:number,y:number}){
-        let xDist = (point.x - Gird.origin.x)
-        let yDist = (point.y - Gird.origin.y)
-        return Math.sqrt(xDist * xDist + yDist * yDist) /this.scale
-    }
-    constructor(public scale:number){  //public scale参数属性
+//  class Gird {
+//     static origin = {x: 0,y:0}
+//     calculateDistanceFromOrigin(point:{x:number,y:number}){
+//         let xDist = (point.x - Gird.origin.x)
+//         let yDist = (point.y - Gird.origin.y)
+//         return Math.sqrt(xDist * xDist + yDist * yDist) /this.scale
+//     }
+//     constructor(public scale:number){  //public scale参数属性
 
-    }
+//     }
+//  }
+
+//  let gird = new Gird(1.0)
+//  console.log(gird.calculateDistanceFromOrigin({x:10,y:10}))
+
+//抽象类
+//  abstract class Father {
+//     abstract name: string;
+//     move():void {
+//         console.log('这是一个抽象类')
+//     }
+//  }
+
+//抽象类的抽象方法不包含具体实现方法，且必须在派生类中实现
+abstract class Father {
+     constructor(public name:string){}
+     printName():void { console.log(`${this.name}`)}
+     abstract printMeeting():void // 必须在派生类实现，它在这里不能实现
+
+}
+ class SonOne extends Father {
+     constructor(public name: string){
+        super(name)
+     }
+     printName():void{ console.log(this.name)}
+     printMeeting():void { console.log('The Accounting Department meets each Monday at 10am')}
  }
 
- let gird = new Gird(1.0)
- console.log(gird.calculateDistanceFromOrigin({x:10,y:10}))
+ //let father = new Father() //错误，无法创建抽象类的实例
+ let son = new SonOne('Mark Chao')
+ son.printName()
+ son.printMeeting()
