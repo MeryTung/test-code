@@ -8,21 +8,6 @@
 //         return 'Hello ' + this.greeting;
 //     }
 // }
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = function (d, b) {
-        extendStatics = Object.setPrototypeOf ||
-            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
-        return extendStatics(d, b);
-    };
-    return function (d, b) {
-        if (typeof b !== "function" && b !== null)
-            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 // let greete = new Greeter("typescript");
 // console.log(greete.greet())
 //类继承
@@ -186,24 +171,48 @@ var __extends = (this && this.__extends) || (function () {
 //         console.log('这是一个抽象类')
 //     }
 //  }
+//抽象类的抽象方法不包含具体实现方法，且必须在派生类中实现
+// abstract class Father {
+//      constructor(public name:string){}
+//      printName():void { console.log(`${this.name}`)}
+//      abstract printMeeting():void // 必须在派生类实现，它在这里不能实现
+// }
+//  class SonOne extends Father {
+//      constructor(public name: string){
+//         super(name)
+//      }
+//      printName():void{ console.log(this.name)}
+//      printMeeting():void { console.log('The Accounting Department meets each Monday at 10am')}
+//  }
+//  //let father = new Father() //错误，无法创建抽象类的实例
+//  let son = new SonOne('Mark Chao')
+//  son.printName()
+//  son.printMeeting()
+//构造函数
+// class Father {
+//     constructor(public greeting: string){ }  //参数属性
+//     greet(){
+//         return " Helo " + this.greeting
+//     }
+// }
+// let father = new Father('World');
+// console.log(father.greet())
+//实例部分，静态部分
 var Father = /** @class */ (function () {
-    function Father(name) {
-        this.name = name;
+    function Father(greeting) {
+        this.greeting = greeting;
     }
-    Father.prototype.printName = function () { console.log("".concat(this.name)); };
+    Father.prototype.greet = function () {
+        if (this.greeting) {
+            return 'Hello' + this.greeting;
+        }
+        else {
+            return 'Hello';
+        }
+    };
+    Father.standerGreeting = " Hello, world! ";
     return Father;
 }());
-var SonOne = /** @class */ (function (_super) {
-    __extends(SonOne, _super);
-    function SonOne(name) {
-        var _this = _super.call(this, name) || this;
-        _this.name = name;
-        return _this;
-    }
-    SonOne.prototype.printName = function () { console.log(this.name); };
-    SonOne.prototype.printMeeting = function () { console.log('The Accounting Department meets each Monday at 10am'); };
-    return SonOne;
-}(Father));
-var son = new SonOne('Mark Chao');
-son.printName();
-son.printMeeting();
+var father = new Father('有值');
+Father.standerGreeting = 'Hello，Mark'; //修改静态的值
+console.log(father.greet());

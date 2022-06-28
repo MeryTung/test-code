@@ -213,21 +213,51 @@
 //  }
 
 //抽象类的抽象方法不包含具体实现方法，且必须在派生类中实现
-abstract class Father {
-     constructor(public name:string){}
-     printName():void { console.log(`${this.name}`)}
-     abstract printMeeting():void // 必须在派生类实现，它在这里不能实现
+// abstract class Father {
+//      constructor(public name:string){}
+//      printName():void { console.log(`${this.name}`)}
+//      abstract printMeeting():void // 必须在派生类实现，它在这里不能实现
 
+// }
+//  class SonOne extends Father {
+//      constructor(public name: string){
+//         super(name)
+//      }
+//      printName():void{ console.log(this.name)}
+//      printMeeting():void { console.log('The Accounting Department meets each Monday at 10am')}
+//  }
+
+//  //let father = new Father() //错误，无法创建抽象类的实例
+//  let son = new SonOne('Mark Chao')
+//  son.printName()
+//  son.printMeeting()
+
+//构造函数
+
+// class Father {
+//     constructor(public greeting: string){ }  //参数属性
+//     greet(){
+//         return " Helo " + this.greeting
+//     }
+// }
+
+// let father = new Father('World');
+// console.log(father.greet())
+
+//实例部分，静态部分
+class Father {
+    static standerGreeting = " Hello, world! ";
+    constructor(public greeting?: string){}
+    greet(){
+        if(this.greeting){
+            return 'Hello' + this.greeting
+        }else{
+            return 'Hello'
+        }
+    }
 }
- class SonOne extends Father {
-     constructor(public name: string){
-        super(name)
-     }
-     printName():void{ console.log(this.name)}
-     printMeeting():void { console.log('The Accounting Department meets each Monday at 10am')}
- }
 
- //let father = new Father() //错误，无法创建抽象类的实例
- let son = new SonOne('Mark Chao')
- son.printName()
- son.printMeeting()
+let father = new Father('有值');
+Father.standerGreeting = 'Hello，Mark' //修改静态的值
+
+console.log(father.greet())
