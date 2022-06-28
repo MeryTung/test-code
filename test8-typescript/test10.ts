@@ -245,19 +245,37 @@
 // console.log(father.greet())
 
 //实例部分，静态部分
-class Father {
-    static standerGreeting = " Hello, world! ";
-    constructor(public greeting?: string){}
-    greet(){
-        if(this.greeting){
-            return 'Hello' + this.greeting
-        }else{
-            return 'Hello'
-        }
-    }
+// class Father {
+//     static standerGreeting = " Hello, world! ";
+//     constructor(public greeting?: string){}
+//     greet(){
+//         if(this.greeting){
+//             return 'Hello' + this.greeting
+//         }else{
+//             return 'Hello'
+//         }
+//     }
+// }
+
+// let father = new Father('有值');
+// Father.standerGreeting = 'Hello，Mark' //修改静态的值
+
+// console.log(father.greet())
+
+
+//类可以创建两个东西
+//1、类的实例类型
+//2、一个构造函数
+//类可以做接口
+//因为类创建类型，所以你在允许使用接口的地方使用类。
+
+class  Point {
+    x:number;
+    y:number
 }
 
-let father = new Father('有值');
-Father.standerGreeting = 'Hello，Mark' //修改静态的值
+interface Ponit3d  extends Point{
+    z:number
+}
 
-console.log(father.greet())
+let point3d: Ponit3d = {x:1,y:2,z:3}
