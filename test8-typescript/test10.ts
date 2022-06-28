@@ -165,24 +165,41 @@
 
 
 //改写成存取器
-let fullNameMaxLength = 10
-class Father {
-    private _fullName: string;
-    get fullName(): string  { 
-         //如果提示”访问器仅在面向ES5和更高版本时可用 “，就tsc test10.ts --t es5  或在tsconfig.ts加上 "target": "es5"属性
-        return this._fullName
-    }
-    set fullName(newName:string){
-        if(newName && newName.length > fullNameMaxLength){
-            throw new Error("fullName has a max length of" +  fullNameMaxLength )
-        }
-        this._fullName =newName
-    }
-}
+// let fullNameMaxLength = 10
+// class Father {
+//     private _fullName: string;
+//     get fullName(): string  { 
+//          //如果提示”访问器仅在面向ES5和更高版本时可用 “，就tsc test10.ts --t es5  或在tsconfig.ts加上 "target": "es5"属性
+//         return this._fullName
+//     }
+//     set fullName(newName:string){
+//         if(newName && newName.length > fullNameMaxLength){
+//             throw new Error("fullName has a max length of" +  fullNameMaxLength )
+//         }
+//         this._fullName =newName
+//     }
+// }
 
-let father = new Father()
-father.fullName = 'Mark Chao'
-if(father.fullName){
-    console.log(father.fullName)
-}
+// let father = new Father()
+// father.fullName = 'Mark Chao'
+// if(father.fullName){
+//     console.log(father.fullName)
+// }
 
+
+
+//静态属性
+ class Gird {
+    static origin = {x: 0,y:0}
+    calculateDistanceFromOrigin(point:{x:number,y:number}){
+        let xDist = (point.x - Gird.origin.x)
+        let yDist = (point.y - Gird.origin.y)
+        return Math.sqrt(xDist * xDist + yDist * yDist) /this.scale
+    }
+    constructor(public scale:number){  //public scale参数属性
+
+    }
+ }
+
+ let gird = new Gird(1.0)
+ console.log(gird.calculateDistanceFromOrigin({x:10,y:10}))

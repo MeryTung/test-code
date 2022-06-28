@@ -132,27 +132,37 @@
 //     console.log(father.fullName)
 // }
 //改写成存取器
-var fullNameMaxLength = 10;
-var Father = /** @class */ (function () {
-    function Father() {
+// let fullNameMaxLength = 10
+// class Father {
+//     private _fullName: string;
+//     get fullName(): string  { 
+//          //如果提示”访问器仅在面向ES5和更高版本时可用 “，就tsc test10.ts --t es5  或在tsconfig.ts加上 "target": "es5"属性
+//         return this._fullName
+//     }
+//     set fullName(newName:string){
+//         if(newName && newName.length > fullNameMaxLength){
+//             throw new Error("fullName has a max length of" +  fullNameMaxLength )
+//         }
+//         this._fullName =newName
+//     }
+// }
+// let father = new Father()
+// father.fullName = 'Mark Chao'
+// if(father.fullName){
+//     console.log(father.fullName)
+// }
+//静态属性
+var Gird = /** @class */ (function () {
+    function Gird(scale) {
+        this.scale = scale;
     }
-    Object.defineProperty(Father.prototype, "fullName", {
-        get: function () {
-            return this._fullName;
-        },
-        set: function (newName) {
-            if (newName && newName.length > fullNameMaxLength) {
-                throw new Error("fullName has a max length of" + fullNameMaxLength);
-            }
-            this._fullName = newName;
-        },
-        enumerable: false,
-        configurable: true
-    });
-    return Father;
+    Gird.prototype.calculateDistanceFromOrigin = function (point) {
+        var xDist = (point.x - Gird.origin.x);
+        var yDist = (point.y - Gird.origin.y);
+        return Math.sqrt(xDist * xDist + yDist * yDist) / this.scale;
+    };
+    Gird.origin = { x: 0, y: 0 };
+    return Gird;
 }());
-var father = new Father();
-father.fullName = 'Mark Chao';
-if (father.fullName) {
-    console.log(father.fullName);
-}
+var gird = new Gird(1.0);
+console.log(gird.calculateDistanceFromOrigin({ x: 10, y: 10 }));
