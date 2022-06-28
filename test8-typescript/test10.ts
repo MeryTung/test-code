@@ -84,28 +84,69 @@
 
 //protect被保护的，与private相同，有一点不同的是，protect可以在派生类中访问
 
-class  Father {
-    protected name: string;
-    protected constructor(name: string){
-        this.name = name
-    }    
-}
+// class  Father {
+//     protected name: string;
+//     protected constructor(name: string){
+//         this.name = name
+//     }    
+// }
 
 
-class SonOne extends Father {
-    private department: string;
-    constructor(name: string,department: string){
-        super(name);
-        this.department = department
-    }
-    public getUserName(){
-        return `halo,my name is ${this.name} and I work the ${this.department}.`
-    }
-}
+// class SonOne extends Father {
+//     private department: string;
+//     constructor(name: string,department: string){
+//         super(name);
+//         this.department = department
+//     }
+//     public getUserName(){
+//         return `halo,my name is ${this.name} and I work the ${this.department}.`
+//     }
+// }
 
-let son = new SonOne('Mark','Ali');
-//let father = new Father('被保护了')  //类”Father“的构造函数时受保护的，仅可在类声明中访问。
-console.log(son.getUserName());
+// let son = new SonOne('Mark','Ali');
+// //let father = new Father('被保护了')  //类”Father“的构造函数时受保护的，仅可在类声明中访问。
+// console.log(son.getUserName());
 //console.log(son.name)  //属性”name“受保护，只能在类”Father及其子类中访问
 
 //构造函数被标记被保护的，就不能进行实例化，但是能被继承。
+
+//ReadOnly标识符
+//只读属性必须在声明时或构造函数内初始化
+// class Father {
+//     readonly name: string;
+//     readonly numberOfLegs: number = 8;
+//     constructor(theName: string){
+//         this.name = theName
+//     }
+// }
+
+// let father = new Father('hello typecsript')
+// father.name = 'OMG' //无法分配到”name“，因为它=是只读属性
+// console.log(father)
+
+//参数属性：参数属性通过给构造函数参数添加一个访问限定符来声明。 使用private限定一个参数属性会声明并初始化一个私有成员；对于public和protected来说也是一样。
+class Father {
+    //构造函数定义的private name，是参数属性。舍弃了theName，仅在构造函数里使用private name: string参数来创建和初始化name成员。 我们把声明和赋值合并至一处。
+        constructor(private name: string){
+    
+        }
+        move(distanceInMeters:number){
+            return `${this.name} moved ${distanceInMeters}`
+        }
+}
+
+class SonOne extends Father {
+      constructor(name: string){
+        super(name)
+      }
+      move(distanceInMeters = 20){
+        return `SonOne -- ${distanceInMeters} `
+      }
+}
+
+let father = new Father('Mark')
+let son = new SonOne('son')
+console.log(father.move(30))
+console.log(son.move())
+
+
