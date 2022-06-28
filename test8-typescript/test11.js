@@ -20,11 +20,14 @@
 //字符串枚举
 //每个成员必须是字符串，或另一个枚举型字符串成员进行初始化
 //它不像数字枚举类型，没有自增长
+var title = 'Left';
 var BooleanLikeogeneousEnum;
 (function (BooleanLikeogeneousEnum) {
     BooleanLikeogeneousEnum["Up"] = "Up";
     BooleanLikeogeneousEnum["Dowm"] = "Dowm";
     BooleanLikeogeneousEnum["Left"] = "Left";
+    //Left = title,   //含字符串值成员的枚举中不预序使用计算值
+    //Left = UserName.Title,   //含字符串值成员的枚举中不预序使用计算值
     BooleanLikeogeneousEnum["Right"] = "Right";
 })(BooleanLikeogeneousEnum || (BooleanLikeogeneousEnum = {}));
 console.log(BooleanLikeogeneousEnum.Left);
