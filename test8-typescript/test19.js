@@ -1,0 +1,31 @@
+//实用工具类型
+//Partial //所有属性设置为可选的
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+function makeObject(desc) {
+    var data = desc.data || {};
+    var methods = desc.methods || {};
+    return __assign(__assign({}, data), methods);
+}
+var obj = makeObject({
+    data: { x: 0, y: 0 },
+    methods: {
+        moveBy: function (dx, dy) {
+            this.x += dx;
+            this.y += dy;
+            return this.x + ' ' + this.y;
+        }
+    }
+});
+obj.x = 10;
+obj.y = 10;
+console.log(obj.moveBy(5, 5));
