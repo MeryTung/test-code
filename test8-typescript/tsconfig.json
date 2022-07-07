@@ -1,6 +1,11 @@
 {
     "compilerOptions": {
     "noImplicitThis": true,
-    "target": "es5"
- }
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "target": "es5",
+    "outDir":"./dist", //输出文件地址
+    // "rootDir": "./src" //输入文件地址
+ },
+ "exclude": ["node_modules"]
 }

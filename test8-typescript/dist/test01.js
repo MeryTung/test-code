@@ -1,3 +1,4 @@
+//基本类型
 // let isActive:boolean = true;
 // let decLiteral: number = 6;
 // let hexLiteral: number = 0xf00d;

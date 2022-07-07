@@ -4,5 +4,5 @@
 //     No = 0,
 //     Ok = "Yes"
 // }
-console.log(F.Y);
-console.log(2 /* E.Y */);
+console.log(F.Y); //编译后结果为console.log(F.Y);
+console.log(2 /* E.Y */); //console.log(2 /* E.Y */);
