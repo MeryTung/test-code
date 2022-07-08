@@ -185,11 +185,15 @@ require("reflect-metadata");
 //     return Reflect.getMetadata(formatMetadataKey, target, propertyKey);
 //   }
 require("reflect-metadata");
+// @Reflect.metadata('token','aWHancYD')
 var Employee = /** @class */ (function () {
     function Employee() {
     }
     Employee.prototype.salary = function () {
         console.log('这是个函数');
+    };
+    Employee.prototype.bar = function () {
+        console.log('Mark');
     };
     Employee.employee = function () {
         console.log('这是个静态函数');
@@ -206,14 +210,21 @@ var Employee = /** @class */ (function () {
         __metadata("design:paramtypes", []),
         __metadata("design:returntype", void 0)
     ], Employee, "employee", null);
-    Employee = __decorate([
-        Reflect.metadata('token', 'aWHancYD')
-    ], Employee);
     return Employee;
 }());
-var token = Reflect.getMetadata('token', Employee);
-var level1 = Reflect.getMetadata('level1', new Employee(), 'salary');
-var level2 = Reflect.getMetadata('level2', Employee, 'employee');
-console.log(token);
-console.log(level1);
-console.log(level2);
+// let token = Reflect.getMetadata('token',Employee);
+// //实例方法与静态方法取元数据是不同的，实例方法需要在类的实例上取元数据，静态方法直接在类上取元数据。
+// let level1 = Reflect.getMetadata('level1',new Employee(),'salary')  
+// let level2 = Reflect.getMetadata('level2',Employee,'employee')  
+// console.log(token)
+// console.log(level1)
+// console.log(level2)
+Reflect.defineMetadata('token', 'aWhancYD', Employee);
+Reflect.defineMetadata('level3', 'hello', Employee, 'bar');
+console.log(Reflect.getMetadata('token', Employee));
+console.log(Reflect.hasMetadata('token', Employee));
+console.log(Reflect.hasMetadata('level3', Employee, 'bar'));
+console.log(Reflect.hasMetadata('level1', new Employee(), 'salary'));
+console.log(Reflect.getMetadataKeys(new Employee(), 'salary'));
+console.log(Reflect.getMetadataKeys(Employee, 'bar'));
+console.log(Reflect.getMetadataKeys(Employee));

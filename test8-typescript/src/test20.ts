@@ -236,23 +236,40 @@ import "reflect-metadata";
 
 import 'reflect-metadata'
 
-@Reflect.metadata('token','aWHancYD')
+// @Reflect.metadata('token','aWHancYD')
 class Employee {
     @Reflect.metadata('level1','D2')
     salary(){
         console.log('这是个函数')
     }
+    bar(){
+        console.log('Mark')
+    }
     @Reflect.metadata('level2','daily')
     static employee(){
         console.log('这是个静态函数')
     }
+    
 }
 
-let token = Reflect.getMetadata('token',Employee);
-//实例方法与静态方法取元数据是不同的，实例方法需要在类的实例上取元数据，静态方法直接在类上取元数据。
-let level1 = Reflect.getMetadata('level1',new Employee(),'salary')  
-let level2 = Reflect.getMetadata('level2',Employee,'employee')  
-console.log(token)
-console.log(level1)
-console.log(level2)
+// let token = Reflect.getMetadata('token',Employee);
+// //实例方法与静态方法取元数据是不同的，实例方法需要在类的实例上取元数据，静态方法直接在类上取元数据。
+// let level1 = Reflect.getMetadata('level1',new Employee(),'salary')  
+// let level2 = Reflect.getMetadata('level2',Employee,'employee')  
+// console.log(token)
+// console.log(level1)
+// console.log(level2)
+
+Reflect.defineMetadata('token','aWhancYD',Employee);
+Reflect.defineMetadata('level3', 'hello', Employee, 'bar')
+console.log(Reflect.getMetadata('token',Employee)) //  aWhancYD
+
+ console.log(Reflect.hasMetadata('token',Employee)) // true
+ console.log(Reflect.hasMetadata('level3',Employee,'bar')) // true
+ console.log(Reflect.hasMetadata('level1',new Employee(),'salary')) // true
+ console.log(Reflect.getMetadataKeys(new Employee(),'salary'))  // [ 'design:returntype', 'design:paramtypes', 'design:type', 'level1' ]
+ console.log(Reflect.getMetadataKeys(Employee,'bar'))  // [ 'level3' ]
+ console.log(Reflect.getMetadataKeys(Employee)) // [ 'token' ]
+
+
 
