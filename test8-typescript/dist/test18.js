@@ -1,4 +1,3 @@
-//映射类型进行推断
 function proxify(t) {
     var result = {};
     var _loop_1 = function (k) {

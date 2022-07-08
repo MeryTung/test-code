@@ -1,5 +1,4 @@
-//类型守卫和类型区分
-var SpaceRepeatingPadder = /** @class */ (function () {
+var SpaceRepeatingPadder = (function () {
     function SpaceRepeatingPadder(numSpace) {
         this.numSpace = numSpace;
     }
@@ -8,7 +7,7 @@ var SpaceRepeatingPadder = /** @class */ (function () {
     };
     return SpaceRepeatingPadder;
 }());
-var StringPadder = /** @class */ (function () {
+var StringPadder = (function () {
     function StringPadder(value) {
         this.value = value;
     }

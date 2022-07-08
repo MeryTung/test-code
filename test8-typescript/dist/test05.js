@@ -1,4 +1,3 @@
-//混合类型
 function sum() {
     var fn = function (x, y) { return x + y; };
     var sm = fn(1, 2);

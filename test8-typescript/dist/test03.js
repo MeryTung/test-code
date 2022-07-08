@@ -1,6 +1,4 @@
-//类类型
-//实现接口
-var Clock = /** @class */ (function () {
+var Clock = (function () {
     function Clock(id, stuName, stuAge) {
         this.id = id;
         this.stuName = stuName;

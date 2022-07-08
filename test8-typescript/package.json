@@ -9,9 +9,6 @@
   "author": "",
   "license": "ISC",
   "devDependencies": {
-    "@babel/plugin-proposal-class-properties": "^7.18.6",
-    "@babel/plugin-proposal-decorators": "^7.18.6",
-    "babel-plugin-transform-typescript-metadata": "^0.3.2",
     "babel-preset-es2015": "^6.24.1",
     "reflect-metadata": "^0.1.13"
   }

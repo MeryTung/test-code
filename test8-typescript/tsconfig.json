@@ -1,11 +1,19 @@
 {
     "compilerOptions": {
+    "removeComments":true, 
     "noImplicitThis": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
-    "target": "es5",
+    // "declaration": true,  //会生成.d.ts文件
+    // "module": "commonjs",
+     "target": "es5",
+     "lib": ["es5", "es6", "dom"],
     "outDir":"./dist", //输出文件地址
-    // "rootDir": "./src" //输入文件地址
+     "rootDir": "./src", //输入文件地址
+     "module": "commonjs",
+    //  "types": [
+    //     "reflect-metadata"  
+    //   ]
  },
  "exclude": ["node_modules"]
 }

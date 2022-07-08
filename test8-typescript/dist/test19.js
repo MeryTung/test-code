@@ -1,5 +1,3 @@
-//实用工具类型
-//Partial //所有属性设置为可选的
 var __assign = (this && this.__assign) || function () {
     __assign = Object.assign || function(t) {
         for (var s, i = 1, n = arguments.length; i < n; i++) {
