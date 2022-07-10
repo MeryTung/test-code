@@ -235,4 +235,4 @@ class C {
 let myClass = new C()
 let clone = {...myClass};
 console.log(clone.a)
-console.log(clone.m())  //不存在属性m
+console.log(clone.m())  //error,不存在属性m
