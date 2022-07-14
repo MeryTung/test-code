@@ -9,8 +9,9 @@
      "target": "es5",
      "lib": ["es5", "es6", "dom"],
     "outDir":"./dist", //输出文件地址
-     "rootDir": "./src", //输入文件地址
-     "module": "commonjs",
+    "rootDir": "./src", //输入文件地址
+     "module": "commonjs"
+    // "module": "AMD",
     //  "types": [
     //     "reflect-metadata"  
     //   ]

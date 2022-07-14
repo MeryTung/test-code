@@ -1,0 +1,415 @@
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = function (d, b) {
+        extendStatics = Object.setPrototypeOf ||
+            ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+            function (d, b) { for (var p in b) if (Object.prototype.hasOwnProperty.call(b, p)) d[p] = b[p]; };
+        return extendStatics(d, b);
+    };
+    return function (d, b) {
+        if (typeof b !== "function" && b !== null)
+            throw new TypeError("Class extends value " + String(b) + " is not a constructor or null");
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __assign = (this && this.__assign) || function () {
+    __assign = Object.assign || function(t) {
+        for (var s, i = 1, n = arguments.length; i < n; i++) {
+            s = arguments[i];
+            for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p))
+                t[p] = s[p];
+        }
+        return t;
+    };
+    return __assign.apply(this, arguments);
+};
+var __spreadArray = (this && this.__spreadArray) || function (to, from, pack) {
+    if (pack || arguments.length === 2) for (var i = 0, l = from.length, ar; i < l; i++) {
+        if (ar || !(i in from)) {
+            if (!ar) ar = Array.prototype.slice.call(from, 0, i);
+            ar[i] = from[i];
+        }
+    }
+    return to.concat(ar || Array.prototype.slice.call(from));
+};
+var Student = (function () {
+    function Student(firstName, lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.fullName = firstName + ' ' + lastName;
+    }
+    return Student;
+}());
+function greeter(person) {
+    return 'Hello' + person.firstName + person.lastName;
+}
+var user = new Student('John', 'User');
+var box = document.getElementById('box');
+document.body.innerHTML = greeter(user);
+var someValue = "hello,typeScript";
+var strLength = someValue.length;
+var strLen = someValue.length;
+var message = 'hahah';
+console.log(message);
+function reverse(s) {
+    return s.split('').reverse().join();
+}
+console.log(reverse('hello world'));
+var Clock = (function () {
+    function Clock(id, stuName, stuAge) {
+        this.id = id;
+        this.stuName = stuName;
+        this.stuAge = stuAge;
+    }
+    Clock.prototype.go = function () {
+    };
+    return Clock;
+}());
+var xiaoming = new Clock(1, 'xiaoming,', 20);
+console.log(xiaoming);
+var square = {};
+square = { color: 'green', penWidth: 10, sideLength: 20 };
+console.log(square);
+function sum() {
+    var fn = function (x, y) { return x + y; };
+    var sm = fn(1, 2);
+    console.log(sm);
+    fn.interval = 10;
+    fn.reset = function () { };
+    return fn;
+}
+console.log(sum());
+var Control = (function () {
+    function Control() {
+    }
+    return Control;
+}());
+var Button = (function (_super) {
+    __extends(Button, _super);
+    function Button() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    Button.prototype.select = function () { };
+    return Button;
+}(Control));
+var clickBtn = (function () {
+    function clickBtn() {
+    }
+    clickBtn.prototype.select = function () { };
+    return clickBtn;
+}());
+var TextBox = (function (_super) {
+    __extends(TextBox, _super);
+    function TextBox() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    TextBox.prototype.foo = function () { };
+    return TextBox;
+}(Control));
+var Handler = (function () {
+    function Handler() {
+    }
+    Handler.prototype.onClickBad = function (e) {
+        console.log('clicked!');
+    };
+    return Handler;
+}());
+var h = new Handler();
+var uiElement = {
+    addClickListener: function () { },
+};
+uiElement.addClickListener(h.onClickBad);
+var handleArtistsResponse = function (response) {
+    if (response.error) {
+        console.error(response.error.message);
+        return;
+    }
+    return response.artists;
+};
+var bar = {
+    success: false,
+    artists: [{ name: 'shabi' }]
+};
+console.log(handleArtistsResponse(bar));
+var Point = (function () {
+    function Point() {
+    }
+    return Point;
+}());
+var point3d = { x: 1, y: 2, z: 3 };
+var title = 'Left';
+var BooleanLikeogeneousEnum;
+(function (BooleanLikeogeneousEnum) {
+    BooleanLikeogeneousEnum["Up"] = "Up";
+    BooleanLikeogeneousEnum["Dowm"] = "Dowm";
+    BooleanLikeogeneousEnum["Left"] = "Left";
+    BooleanLikeogeneousEnum["Right"] = "Right";
+})(BooleanLikeogeneousEnum || (BooleanLikeogeneousEnum = {}));
+console.log(BooleanLikeogeneousEnum.Left);
+console.log(F.Y);
+console.log(2);
+var BeeKeeper = (function () {
+    function BeeKeeper() {
+    }
+    return BeeKeeper;
+}());
+var ZooKeeper = (function () {
+    function ZooKeeper() {
+    }
+    return ZooKeeper;
+}());
+var Animal = (function () {
+    function Animal() {
+    }
+    return Animal;
+}());
+var Bee = (function (_super) {
+    __extends(Bee, _super);
+    function Bee() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Bee;
+}(Animal));
+var Lion = (function (_super) {
+    __extends(Lion, _super);
+    function Lion() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    return Lion;
+}(Animal));
+function createInstance(c) {
+    return new c();
+}
+var lion = new Lion();
+console.log(lion.keeper);
+console.log(createInstance(Lion));
+createInstance(Bee);
+function getSmallpet() {
+    return;
+}
+var pet = getSmallpet();
+pet.layEggs();
+var SpaceRepeatingPadder = (function () {
+    function SpaceRepeatingPadder(numSpace) {
+        this.numSpace = numSpace;
+    }
+    SpaceRepeatingPadder.prototype.getPaddingString = function () {
+        return Array(this.numSpace + 1).join(" ");
+    };
+    return SpaceRepeatingPadder;
+}());
+var StringPadder = (function () {
+    function StringPadder(value) {
+        this.value = value;
+    }
+    StringPadder.prototype.getPaddingString = function () {
+        return this.value;
+    };
+    return StringPadder;
+}());
+function getRandomPadder() {
+    return Math.random() < 0.5 ? new SpaceRepeatingPadder(4) : new StringPadder(" ");
+}
+var padder = getRandomPadder();
+if (padder instanceof SpaceRepeatingPadder) {
+    console.log(padder);
+}
+if (padder instanceof StringPadder) {
+    console.log(padder);
+}
+var keys = { '0': 1, '1': 2, '2': 3 };
+var keys2;
+var value;
+var keys3 = { '0': 1, '1': 2, '2': 3 };
+console.log(keys.foo);
+function proxify(t) {
+    var result = {};
+    var _loop_1 = function (k) {
+        result[k] = {
+            get: function () { return t[k]; },
+            set: function (value) { return t[k] = value; }
+        };
+    };
+    for (var k in t) {
+        _loop_1(k);
+    }
+    return result;
+}
+var props = { rooms: 4 };
+var proxyProps = proxify(props);
+console.log(proxyProps.rooms.get());
+function proxify(t) {
+    var result = {};
+    var _loop_2 = function (k) {
+        result[k] = {
+            get: function () { return t[k]; },
+            set: function (value) { return t[k] = value; }
+        };
+    };
+    for (var k in t) {
+        _loop_2(k);
+    }
+    return result;
+}
+function unProxiy(t) {
+    var result = {};
+    for (var k in t) {
+        result[k] = t[k].get();
+    }
+    return result;
+}
+var props = { room: 4 };
+var proxyProps = proxify(props);
+var originalProps = unProxiy(proxyProps);
+console.log(originalProps);
+function makeObject(desc) {
+    var data = desc.data || {};
+    var methods = desc.methods || {};
+    return __assign(__assign({}, data), methods);
+}
+var obj = makeObject({
+    data: { x: 0, y: 0 },
+    methods: {
+        moveBy: function (dx, dy) {
+            this.x += dx;
+            this.y += dy;
+            return this.x + ' ' + this.y;
+        }
+    }
+});
+obj.x = 10;
+obj.y = 10;
+console.log(obj.moveBy(5, 5));
+var o = {
+    a: 20,
+    b: 12,
+    c: 'bar'
+};
+var first = [1, 2];
+var second = [4, 5];
+var bothPost = __spreadArray(__spreadArray(__spreadArray([0], first, true), second, true), [8], false);
+console.log(bothPost);
+var C = (function () {
+    function C() {
+        this.a = 13;
+    }
+    C.prototype.m = function () {
+        console.log('hello');
+    };
+    return C;
+}());
+var myClass = new C();
+var clone = __assign({}, myClass);
+console.log(clone.a);
+console.log(clone.m());
+var pets = new Set(["Cat", "Dog", "Hamster"]);
+pets["species"] = "mammals";
+for (var pet_1 in pets) {
+    console.log(pet_1);
+}
+for (var _i = 0, pets_1 = pets; _i < pets_1.length; _i++) {
+    var pet_2 = pets_1[_i];
+    console.log(pet_2);
+}
+function fatherMixins(base) {
+    return (function (_super) {
+        __extends(class_1, _super);
+        function class_1() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        class_1.prototype.displayFatherName = function () {
+            return this.fatherName;
+        };
+        return class_1;
+    }(base));
+}
+function motherMixins(base) {
+    return (function (_super) {
+        __extends(class_2, _super);
+        function class_2() {
+            return _super !== null && _super.apply(this, arguments) || this;
+        }
+        class_2.prototype.displayMotherName = function () {
+            return this.motherName;
+        };
+        return class_2;
+    }(base));
+}
+var Father = (function () {
+    function Father(_fatherName) {
+        this.fatherName = _fatherName;
+    }
+    Father.prototype.displayFatherName = function () {
+        return this.fatherName;
+    };
+    return Father;
+}());
+var Mother = (function () {
+    function Mother(_motherName) {
+        this.motherName = _motherName;
+    }
+    Mother.prototype.displayMotherName = function () {
+        return this.motherName;
+    };
+    return Mother;
+}());
+var MixinFatherMother = fatherMixins(motherMixins((function () {
+    function class_3() {
+    }
+    return class_3;
+}())));
+var Child = (function (_super) {
+    __extends(Child, _super);
+    function Child(fatherName, motherName, childName) {
+        var _this = _super.call(this) || this;
+        _this._childName = childName;
+        _this.fatherName = fatherName;
+        _this.motherName = motherName;
+        return _this;
+    }
+    Child.prototype.displayMname = function () {
+        return _super.prototype.displayMotherName.call(this);
+    };
+    Child.prototype.displayFname = function () {
+        return _super.prototype.displayFatherName.call(this);
+    };
+    Child.prototype.displayChild = function () {
+        return this._childName;
+    };
+    return Child;
+}(MixinFatherMother));
+var oName = new Child('Mark', 'Yuan', 'Merrey');
+console.log(oName.displayFname());
+console.log(oName.displayChild());
+console.log(oName.displayMname());
+var strings = ['hello', '12345', '20'];
+var validators = {};
+validators['Letter only'] = new Validation.LettersOnlyValidator();
+validators['Number only'] = new Validation.NumbersOnlyValidator();
+var Validation;
+(function (Validation) {
+    var lettersRegexp = /^[A-Za-z]+$/;
+    var LettersOnlyValidator = (function () {
+        function LettersOnlyValidator() {
+        }
+        LettersOnlyValidator.prototype.isAcceptable = function (s) {
+            return lettersRegexp.test(s);
+        };
+        return LettersOnlyValidator;
+    }());
+    Validation.LettersOnlyValidator = LettersOnlyValidator;
+})(Validation || (Validation = {}));
+var Validation;
+(function (Validation) {
+    var numberRegex = /^[0-9]+$/;
+    var NumbersOnlyValidator = (function () {
+        function NumbersOnlyValidator() {
+        }
+        NumbersOnlyValidator.prototype.isAcceptable = function (s) {
+            return numberRegex.test(s);
+        };
+        return NumbersOnlyValidator;
+    }());
+    Validation.NumbersOnlyValidator = NumbersOnlyValidator;
+})(Validation || (Validation = {}));
