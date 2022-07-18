@@ -4,6 +4,8 @@
     "noImplicitThis": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
+    "strictNullChecks": false,
+    "strictFunctionTypes": true,
     // "declaration": true,  //会生成.d.ts文件
     // "module": "commonjs",
      "target": "es5",
