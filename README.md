@@ -1,3 +1,3 @@
 test-code
 
-learn vue
+Learn Vue/JavaScript/TypeScript 笔记
