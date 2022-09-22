@@ -170,20 +170,20 @@ cc = aa;
 
 
 //泛型
-interface  Empty<T> {
-     value: T
-}
+// interface  Empty<T> {
+//      value: T
+// }
 
-let object1:Empty<number> =  {value: 1}
-let object2:Empty<string> = {value: 'hello'}
-object1 = object2
+// let object1:Empty<number> =  {value: 1}
+// let object2:Empty<string> = {value: 'hello'}
+// object1 = object2
 
-let log1 =<T>(x:T):T => x;
+// let log1 =<T>(x:T):T => x;
 
-let log2 =<U>(x:U):U => x;
+// let log2 =<U>(x:U):U => x;
 
-log1 =log2 
-log2 = log1
+// log1 =log2 
+// log2 = log1
 
 // let a = 1;  //number
 // let b =[];  //any[]
@@ -191,31 +191,31 @@ log2 = log1
 // let d = ['d']  //string[]
 
 
-let a1 = (x=1)=> x  //(x?:number) =>number
-let b1 = (x=1) => {return x+1}
+// let a1 = (x=1)=> x  //(x?:number) =>number
+// let b1 = (x=1) => {return x+1}
 
 
-//let a2:(x?:number) =>number
-let a2 = (x =1) => {
-    const res = x + 2;
-    return res   //res:number
-}
+// //let a2:(x?:number) =>number
+// let a2 = (x =1) => {
+//     const res = x + 2;
+//     return res   //res:number
+// }
 
-let b2 = [1,null];
+// let b2 = [1,null];
 
-window.onkeydown = (event:KeyboardEvent) => {
-    console.log(event.AT_TARGET)
-}
+// window.onkeydown = (event:KeyboardEvent) => {
+//     console.log(event.AT_TARGET)
+// }
 
-window.onkeydown = (event:KeyboardEvent) => { console.log('onkeydown')}
+// window.onkeydown = (event:KeyboardEvent) => { console.log('onkeydown')}
 
-// let foo = {} 
-// foo.bar = 123
+// // let foo = {} 
+// // foo.bar = 123
 
-interface Foo {
-     bar: number
-}
+// interface Foo {
+//      bar: number
+// }
 
-let foo:Foo ={
-    bar:123
-};
+// let foo:Foo ={
+//     bar:123
+// };

@@ -1,0 +1,10 @@
+{
+    "extends": "../../tsconfig.json",
+    "compilerOptions": {
+        // The usual
+        "outDir": "../../build/client"
+    },
+    "references": [ /**依赖*/
+        { "path": "../common" }
+    ]
+}

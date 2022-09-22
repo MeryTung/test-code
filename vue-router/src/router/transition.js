@@ -10,6 +10,7 @@ const  routes = [
     // {path:'/other',component:Other,meta:{transition:'slide-right'}},
     {path:'/',component:Custom},
     {path:'/other',component:Other,
+    redirect:{path:'/about'},
       beforeEnter:()=>{
         return false
       } 

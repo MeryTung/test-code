@@ -1,22 +1,27 @@
 {
+   // "include": ["test31.ts","test32.js"],
+    //"references": [{ "path": "./src/test29.ts" }],
     "compilerOptions": {
-    "removeComments":true, 
+    "removeComments":true,   //删除编译后注释
     "noImplicitThis": true,
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "strictNullChecks": false,
     "strictFunctionTypes": true,
+    "allowUmdGlobalAccess": true,
     // "declaration": true,  //会生成.d.ts文件
     // "module": "commonjs",
      "target": "es5",
      "lib": ["es5", "es6", "dom"],
-    "outDir":"./dist", //输出文件地址
-    "rootDir": "./src", //输入文件地址
-     "module": "commonjs"
+  //  "outDir":"./dist", //输出文件地址
+   // "rootDir": "./src", //输入文件地址
+     "module": "commonjs",
+     "allowJs": true
     // "module": "AMD",
     //  "types": [
     //     "reflect-metadata"  
     //   ]
- },
- "exclude": ["node_modules"]
+ }
+//  "exclude": ["node_modules"],
+//  "include": ["src"]
 }

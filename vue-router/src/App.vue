@@ -1,6 +1,8 @@
 <template>
  <div>
   <img alt="Vue logo" src="./assets/logo.png" />
+   <router-link to="/">About</router-link> |
+   <router-link to="/home">Home</router-link> |
    <!-- <AppLink to="/">Home</AppLink> |
    <AppLink to="/user/yehua">User</AppLink> |
    <AppLink to="/about/1/child">About</AppLink> |
@@ -9,8 +11,8 @@
    <router-view />
    <router-view name="First"></router-view> 
    <router-view name="Second"></router-view>  -->
-   <AppLink to="/">Custom</AppLink>  |
-   <AppLink to="/other">Other</AppLink>
+   <!-- <AppLink to="/">Custom</AppLink>  |
+   <AppLink to="/other">Other</AppLink> -->
    <!----这里是对所有的路由使用过渡---->
    <!-- <router-view v-slot="{ Component }">
        <transition name="slide-fade">
@@ -23,12 +25,12 @@
             <component :is="Component" />
         </transition>
     </router-view> -->
-    <router-view v-slot="{ Component,route }">
+    <!-- <router-view v-slot="{ Component,route }">
         <transition :name="route.meta.transitionName">
             <component :is="Component" />
         </transition>
-    </router-view>
-    <!-- <router-view /> -->
+    </router-view> -->
+    <router-view />
  </div>
 
 </template> 

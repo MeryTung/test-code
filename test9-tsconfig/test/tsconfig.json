@@ -1,0 +1,7 @@
+{
+    "extends": "../tsconfig.json",
+    "references": [ /**依赖*/
+        { "path": "../src/client" },
+        { "path": "../src/server"}
+    ]
+}
