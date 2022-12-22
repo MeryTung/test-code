@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+<body>
+    <div id="box">
+        菜单按钮
+        <!-- textInput事件:<input type="text" class="test"/><br/>
+       keyPress事件:<input type="text" class="test2"/>
+        <button class="btn">点击我</button>
+        <a href="https://www.baidu.com/" class="myLink">点击百度</a>
+        <button class="btn2">清理css</button>
+        <iframe src="son.html">子页面</iframe> -->
+        <!-- <img src ="../img/code.png" onclick="console.log('hello')" class="myImage" alt="图片"/> -->
+    </div>
+    <ul id="myMenu" style="position:absolute;visibility:hidden;background-color:silver">
+        <li><a href="https://www.baidu.com">百度</a></li>
+        <li><a href="http://www.tanglua.com">tanglua</a></li>
+        <li><a href="https://www.google.com/">陈思成</a></li>
+    </ul>
+    <script>
+        // document.addEventListener('DOMContentLoaded', function(e){
+        //     console.log('Content loaded');
+        //     console.log(e)
+        // })\
+        window.addEventListener('load',(e)=>{
+            document.addEventListener('readystatechange',(e)=>{
+                console.log('content loaded')
+            if(e.readyState =='interactive' || e.readyState =='complete'){
+                console.log('content loaded')
+            }
+        })
+        })
+       
+        // window.addEventListener('beforeunload',(e)=> {
+        //     let message = "I'm really going to miss you if  you go";
+
+        //     e.returnValue = message;
+        //     console.log(e.returnValue);
+        //     return message;
+        // })
+        window.addEventListener('load',(e)=>{
+        let box = document.getElementById('box');
+        box.addEventListener('contextmenu',(e)=>{
+          
+           e.preventDefault();
+            let menu = document.getElementById('myMenu');
+            menu.style.left = e.clientX + 'px';
+            menu.style.top = e.clientY + 'px';
+            menu.style.visibility = 'visible';
+        }) 
+        document.addEventListener('click',(e)=>{
+            document.getElementById('myMenu').style.visibility = 'hidden';
+        })
+        })
+        // let test = document.querySelector('.test');
+        // let test2 = document.querySelector('.test2');
+        // let btn = document.querySelector('.btn');
+        // btn.addEventListener('keypress',(e)=>{console.log('btn 执行了keypress')});
+        // btn.addEventListener('textInput',(e)=> console.log('btn 执行了textInput'))
+        // test2.addEventListener('keypress',(e)=>{
+        //     console.log('data',e.charCode);
+        //     console.log('inputMethod',e.inputMethod)
+        // })
+        // test.addEventListener('textInput',(e)=>
+        // {
+        //     console.log('data',e.data);
+        //     console.log('inputMethod',e.inputMethod)
+            // let charcode = e.charCode;
+            // console.log(e.key);
+            // console.log(e.getModifierState('Shift'));
+            // console.log(String.fromCharCode(charcode));
+        // }
+        
+        // )
+
+        //修饰键
+
+        // window.addEventListener('mousewheel', function(e){
+        //     console.log(e.wheelDelta)
+        // })
+
+        // window.addEventListener('click',(e)=>console.log('点击了我'))
+        // let EventUtil = {
+        //     getRelatedTarget:function(e){
+        //         if(e.relateTarget){
+        //            return e.relateTarget
+        //         }else if(e.toElement){
+        //             return e.toElement
+        //         }else if(e.fromElement){
+        //             return e.fromElement
+        //         }else {
+        //             return null
+        //         }
+        //     }
+        // }
+        // let btn = document.querySelector('.btn');
+        // btn.addEventListener('mouseout',(e)=>{
+        //     let target = e.target;
+        //     let relatedTarget = EventUtil.getRelatedTarget(e)
+        //     console.log(`执行了mouseout事件 ${target.tagName} to ${relatedTarget.tagName}`)
+        // });
+        // btn.addEventListener('mouseover',(e)=>
+        // {
+
+        //     let target = e.target;
+        //     let relatedTarget = EventUtil.getRelatedTarget(e)
+        //     console.log(`执行了mouseover事件 ${target.tagName} to ${relatedTarget.tagName}`)
+        // })
+        // btn.addEventListener('click',(e)=>{
+        //     let keys = new Array();
+        //     if(e.shiftKey){
+        //         keys.push('shift')
+        //     }
+        //     if(e.ctrlKey){
+        //         keys.push('ctrl')
+        //     }
+        //     if(e.altKey){
+        //         keys.push('alt')
+        //     }
+        //     if(e.metaKey){
+        //         keys.push('meta')
+        //     }
+        //     console.log('Keys:' + keys.join(','))
+        // })
+
+        // let btn = document.querySelector('.btn');
+        // btn.addEventListener('click',(e)=>{console.log(`Page coorfinates: ${e.clientX}, ${e.clientY}`)})
+        // let test = document.querySelector('.test');
+        // let myImage = document.querySelector('.myImage');
+        // test.addEventListener('keyboard',function(e) {console.log(e.type)},false);
+        // myImage.addEventListener('load',(e)=>{
+        //     console.log(e.target.alt)
+        // })
+            // let btn2 = document.querySelector('.btn2');
+            // btn2.addEventListener('click',function(e){
+            //     links.addEventListener('unload')
+            // })
+            // window.addEventListener('unload',(e)=> {
+            //     console.log('Unloaded')
+            // })
+            // window.addEventListener('beforeunload', function(event) {
+            //      alert('I am the 1st one.');
+            // });
+            // window.addEventListener('unload', function(event) {
+            // alert('I am the 3rd one.');
+            // });
+
+            // window.addEventListener('resize',(e)=>console.log('Resized'))
+        // window.addEventListener('load',function(e){
+        //     let script = document.createElement('script');
+        //     script.type = 'text/javascript';
+        //     script.addEventListener('load',function(){
+        //         console.log('javascript load')
+        //     });
+        //     script.src = '../bundle.js';
+        //     document.body.appendChild(script)
+            //let myImage = document.createElement('img');
+
+            // let myImage = new Image();
+            // myImage.addEventListener('load',(e)=>{
+            //     console.log(e.target.src)
+            // });
+           
+            // myImage.src = '../img/code.png';
+            // document.body.appendChild(myImage);
+            // let handler = function(){
+            //     let links = document.createElement('link');
+            //     links.type = 'text/css';
+            //     links.rel = 'stylesheet';
+            //     links.href = '../css/style.css';
+            //     links.addEventListener('load',()=> {console.log('css load')})
+            //     document.getElementsByTagName("head")[0].appendChild(links);
+            // }
+            // handler()
+           
+         
+           
+            //document.body.appendChild(links)
+           
+            
+        // })
+
+        //默认事件
+        // let myLink = document.querySelector('.myLink');
+        // myLink.onclick = function(e){
+        //     console.log('Clicked');
+        //     e.stopPropagation();
+        //     e.preventDefault();
+        //     console.log(e)
+        // }
+
+        // document.body.onclick = function(e){
+        //     console.log('Body clicked')
+        // }
+        // //处理多个事件
+        // let btn = document.querySelector('.btn');
+        // let handler = function(e){
+        //     switch(e.type){
+        //         case 'click':
+        //             console.log('Clicked');
+        //             break;
+        //         case "mouseover":
+        //              e.target.style.backgroundColor = 'red';
+        //             break;
+        //         case 'mouseout':
+        //             e.target.style.backgroundColor = '';
+        //             break;
+        //         default:
+        //             console.log('default');
+        //             break;
+        //     }
+        // }
+
+        // btn.addEventListener('mouseover', handler,false);
+        // btn.onmouseout = handler;
+        // btn.onclick = handler;
+        // let btn = document.querySelector('.btn');
+        // document.body.onclick = function(e){
+        //     console.log(e.currentTarget);
+        //     console.log(e.target);
+        //     console.log(this);
+        //     console.log(e.eventPhase)
+        // }
+        // btn.addEventListener('click',function(e){
+        //     console.log(e.type);
+        //     console.log(e.eventPhase);
+        //     console.log(e.target);
+        //     console.log(e.currentTarget)
+        // },false)
+        // var handler = function(){
+        //     console.log('hello')
+        // }
+        // btn.addEventListener('click',handler,false)
+        // btn.onclick = function(e){
+        //     console.log(e.type)
+        // }
+        // btn.removeEventListener('click',handler,false);
+        // btn.attachEvent('click',handler)
+    </script>
+</body>
+</html>

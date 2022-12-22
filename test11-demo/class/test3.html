@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理与反射</title>
+</head>
+<body>
+    <script>
+    //    const target = {
+    //     foo: 'foo', 
+    //    }  
+
+    //    Object.defineProperty(target, 'bar',{
+    //     configurable: false,
+    //     enumerable:true,
+    //     writable: false,
+    //     value:'baz'
+    //    })
+    //    const handler = {
+    //     // get(trapTarget,property,receiver){
+    //     //     console.log(trapTarget)
+    //     //     console.log(property)
+    //     //     console.log(receiver)
+    //     // }
+    //     get(){
+    //          return Reflect.get(...arguments)
+    //        // return 'qux'
+    //     }
+    //    }
+
+    //    const {proxy,revoke } = Proxy.revocable(target, handler)
+    //    console.log(proxy.foo);
+    //    console.log(proxy.bar);
+    //    revoke();
+    //    console.log(proxy.foo);
+
+
+    // const wm = new WeakMap();
+    // class User {
+    //     constructor(userId){
+    //         wm.set(this,userId)
+    //     }
+
+    //     set id(userId){
+    //         wm.set(this,userId)
+    //     }
+    //     get id(){
+    //         return wm.get(this)
+    //     }
+    // }
+
+    // //const user = new User(123);
+
+    // //console.log(user.id);
+
+    // const proxy = new Proxy(User,{
+
+    // });
+    // const proxyUser = new proxy(123)
+    // console.log(proxyUser.id)
+    // const myTarget = function(){};
+    // const proxy = new Proxy(myTarget, {
+    //     construct(target,argumentsList,newTarget){
+    //         console.log('construct()');
+    //         this.age = argumentsList.age
+    //         console.log(...arguments)
+    //         return Reflect.construct(...arguments)
+    //     }
+    // });
+
+    // new proxy(18,'yuanyuan')
+
+    //  const target = {
+    //     foo: 0
+    //  }
+
+    //  const proxy = new Proxy(target,{
+    //     // get(target,property,receiver){
+    //     //     return Reflect.get(...arguments)
+    //     // },
+    //     set(target,property,value){
+    //         if(typeof value !== 'number'){
+    //             return false;
+    //         }else{
+    //             return Reflect.set(...arguments)
+    //         }
+    //     }
+    //  });
+
+    //  proxy.foo = 2;
+    //  console.log(proxy.foo)
+
+    // function median(...nums){
+    //     return nums.sort()[Math.floor(nums.length/2)]
+    // }
+    
+    // const proxy = new Proxy(median,{
+    //     apply(target,thisAry,argumentsList){
+    //         for(let arg of argumentsList){
+    //             if(typeof arg !== 'number'){
+    //                 throw 'Non-number argument provided'
+    //             }
+    //             return target.apply(thisAry,argumentsList)
+    //            // return target.call(thisAry,...argumentsList);
+    //            // return Reflect.apply(...arguments)
+    //         }
+    //     }
+    // })
+
+    // console.log(proxy(5,4,3,9,1,7,2))
+
+    // class User {
+    //     constructor(id){
+    //         this.id = id
+    //     }
+    // }
+
+    //     const proxy =new Proxy(User,{
+    //         construct(target,argumentsList,newTarget){
+    //             console.log(target);
+    //             console.log(argumentsList);
+    //             console.log(newTarget);
+    //             if(argumentsList[0] ===undefined){
+    //                 throw 'User cannot be instantiated without id';
+    //             }
+    //             return new newTarget(...arguments)
+    //             //return Reflect.construct(...arguments)
+    //         }
+    //     })
+
+    //     console.log(new proxy(1))
+
+    //数据绑定到全局数组中
+    // const userList = [];
+    // function User(name){
+    //     this.name_ = name
+    // }
+    // const proxy = new Proxy(User,{
+    //     construct(target,argumentsList,newTarget){
+    //         for(let i = 0;i<argumentsList.length;i++){
+    //             userList.push(argumentsList[i]);
+    //         }
+    //         return Reflect.construct(...arguments);
+          
+    //     }
+    // });
+
+    // new proxy('yuanyuan','youting','sicheng','xiaohua','xiaoming')
+    // console.log(userList);
+
+    const userList = [];
+
+    function emit(newValue){
+        console.log(newValue);
+    }
+
+    const proxy = new Proxy(userList,{
+        set(target,property,value,receiver){
+            const result = Reflect.set(...arguments);
+            if(result){
+                emit(Reflect.get(target,property,receiver))
+            }
+            return result
+        }
+    })
+
+    proxy.push('John');
+    proxy.push('Mark')
+    
+    </script>
+</body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件性能与内存</title>
+</head>
+<body>
+        <ul id="myDiv">
+            <li id="google">谷歌</li>
+            <li id="baidu">百度</li>
+            <li id="sayHi">Say Hi</li>
+        </ul>
+    <script>
+        let myDiv = document.getElementById("myDiv");
+        let google = document.getElementById("google");
+        let baidu = document.getElementById("baidu");
+        let sayHi = document.getElementById("sayHi");
+        myDiv.addEventListener("click",function(e){
+            let target = e.target;
+            switch(target.id){
+                case "google":
+                    location.href="https://www.google.com";
+                    break;
+                case "baidu":
+                    location.href = "https://www.baidu.com";
+                    break;
+                case "sayHi":
+                    location.href = "http://www.tanglua.com";
+                    break;
+            }
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DOM 编程</title>
+</head>
+<body>
+    <div id="myDiv">
+         Dom编程
+    </div>
+    <script>
+        let script = document.createElement('script');
+       // script.appendChild(document.createTextNode("function sayHi(){alert('hi')};sayHi()"));
+       // script.text = "function sayHi(){alert('Hi')}";
+        let code = "function sayHi(){alert('Hi')}";
+        try{
+            script.appendChild(document.createTextNode("code"))
+        }catch(e){
+            script.text ="code"
+        }
+        document.body.appendChild(script);
+
+        let myDiv = document.getElementById('myDiv');
+        myDiv.innerHTML = '<script>function sayHi(){alert("Hi")};sayHi()<\/script>' //永远不会执行
+
+        // let link = document.createElement('link');
+        // link.rel="stylesheet";
+        // link.type="text/css";
+        // link.href="../css/style.css";
+        let head = document.getElementsByTagName("head")[0];
+       // head.appendChild(link);
+
+        let style = document.createElement('style');
+        style.type='text/css';
+      // style.appendChild(document.createTextNode('body{background-color:blue}'));
+        style.styleSheet.cssText = 'body{background-color:blue}'
+        head.appendChild(style)
+    </script>
+</body>
+</html>

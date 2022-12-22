@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>XHR</title>
+</head>
+<body>
+    <script>
+        let xhr = new XMLHttpRequest();
+        xhr.open("get","../json/userInfo.json",false);
+       // xhr.abort();
+       xhr.setRequestHeader("MyHeader","MyValue")
+        xhr.onreadystatechange = function() {
+            console.log(xhr.readyState)
+        }
+       
+        xhr.send(null)
+        if((xhr.status >= 200 && xhr.status < 300) || xhr.status == 304){
+            console.log(xhr.status);
+            console.log(xhr.statusText)
+            console.log(xhr.responseText);
+            console.log(xhr.getAllResponseHeaders())
+        }else{
+            console.log("Error")
+        }
+        
+    </script>
+</body>
+</html>

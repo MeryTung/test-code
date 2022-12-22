@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>手机触屏事件</title>
+</head>
+<body>
+    <div id="output">
+        哈哈哈
+        <hr/>
+    </div>
+   <script>
+    function handleGestureEvent(event){
+        //event.preventDefault();
+        let output = document.getElementById('output');
+        switch(event.type){
+            case "gesturestart":
+                output.innerHTML += `<br/>Gesture started:(rotation = ${event.rotation},
+                scale = ${event.scale})`;
+                break;
+            case "gesturechange":
+                output.innerHTML += `<br/>Gesture changed:(rotation = ${event.rotation},
+                scale = ${event.scale})`;
+                break;
+            case "gestureend":
+                output.innerHTML += `<br/>Gesture ended:(rotation = ${event.rotation},
+                scale = ${event.scale})`;
+                break;
+        }   
+    }
+
+    document.addEventListener('gesturestart',handleGestureEvent,false);
+    document.addEventListener('gesturechange',handleGestureEvent,false);
+    document.addEventListener('gestureend',handleGestureEvent,false);
+
+
+    function handleTouchEvent(event){
+        // console.log(event.type)
+        // console.log('event.touches',event.touches);
+        // console.log('event.changedTouches',event.changedTouches)
+        if(event.changedTouches.length == 1) {
+            let output = document.getElementById("output");
+           
+            switch(event.type){
+                case "touchstart":
+                    output.innerHTML += `<br>Touch Started:(${event.touches[0].clientX},${event.touches[0].clientY})`;
+                    break;
+                case "touchmove":
+                    event.preventDefault();
+                    output.innerHTML += `<br>Touch Moved:(${event.changedTouches[0].clientX},${event.changedTouches[0].clientY})`;
+                    break;
+                case "touchend":
+                    console.log(event.type);
+                    console.log(event.changedTouches);
+                    console.log(event)
+                     output.innerHTML += `<br>Touch Ended:(${event.changedTouches[0].clientX},${event.changedTouches[0].clientY})`;
+                    break;
+                case "touchcancel":
+                    output.innerHTML += `<br>Touch Canceled:(${event.changedTouches[0].clientX},${event.changedTouches[0].clientY})`;
+                    break;
+            }
+        }
+    }
+
+    // document.addEventListener('touchstart',handleTouchEvent,{passive:false});
+    // document.addEventListener('touchmove',handleTouchEvent,{passive:false});
+    // document.addEventListener('touchcancel',(e)=>console.log('cancle'),{passive:false});
+    // document.addEventListener('touchend',handleTouchEvent,{passive:false});
+   
+   
+   </script> 
+</body>
+</html>

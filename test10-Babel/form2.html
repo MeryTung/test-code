@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <form id="registerForm" method="post" action="#">
+        用户名：<input type="text" name="userName">
+        密码：<input type="text" name="password">
+        手机号码：<input type="text" name="phoneNumber">
+        <button type="submit">提交</button>
+    </form>
+    <script>
+        // 策略对象
+        const strategies = {
+            // 空验证
+            isNoEmpty(value, errMsg) {
+                if (value === '') return errMsg
+            },
+            // 空格验证
+            isNoSpace(value, errMsg) {
+                if (value.trim() === '') return errMsg
+            },
+            // 最小长度验证
+            minLength(value, length, errMsg) {
+                if (value.trim().length < length) return errMsg
+            },
+            // 最大长度验证
+            maxLength(value, length, errMsg) {
+                if (value.length > length) return errMsg
+            },
+            // 手机号
+            isMobile(value, errMsg) {
+                if (!/^(13[0-9]|14[5|7]|15[0|1|2|3|5|6|7|8|9]|17[7]|18[0|1|2|3|5|6|7|8|9])\d{8}$/.test(value))
+                    return errMsg
+            },
+        }
+
+        // 验证类
+        class Validator {
+            constructor() {
+                this.cache = []
+            }
+            // 添加规则
+            add(value, rules) {
+                for (let i = 0, rule; rule = rules[i++];) {
+                    let {strategy, errMsg} = rule
+                    const strateyArr = strategy.split(":")
+                    this.cache.push(() => {
+                        let strategy = strateyArr.shift() // 提取规则名称
+                        strateyArr.unshift(value)
+                        strateyArr.push(errMsg)
+                        return strategies[strategy].apply({}, strateyArr) // strateyArr=> [value,errMsg] |[value,length,errMsg]
+                    })
+                }
+            }
+            // 验证规则
+            start() {
+                for (let i = 0, validatorFunc; validatorFunc = this.cache[i++];) {
+                    const errMsg = validatorFunc()
+                    if(errMsg) return errMsg
+                }
+            }
+        }
+
+        const registerForm = document.getElementById('registerForm')
+
+        let validataFunc = function () {
+            let validator = new Validator()
+            let {userName, password, phoneNumber} = registerForm
+            debugger
+            // 添加规则
+            validator.add(userName.value,[
+                { strategy: 'isNoEmpty', errMsg: '用户名不可为空'},
+                { strategy: 'isNoSpace', errMsg: '不允许以空白字符命名'},
+                { strategy: 'minLength:2', errMsg: '用户名长度不能小于2位'},
+            ])
+
+            validator.add(password.value, [ 
+                { strategy: 'minLength:6', errMsg: '密码长度不能小于6位' }
+            ])
+
+            validator.add(phoneNumber.value, [
+                { strategy: 'isMobile', errMsg: '请输入正确的手机号码格式'}
+            ])
+
+            return validator.start()
+        }
+
+        registerForm.onsubmit = function(){
+            const errMsg = validataFunc()
+            if(errMsg){
+                alert(errMsg)
+                
+            }
+        }
+    </script>
+</body>
+
+</html>

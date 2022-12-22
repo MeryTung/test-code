@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>函数</title>
+</head>
+<body>
+    <script>
+        // function sum(a,b){
+        //     return a + b
+        // }
+
+        // const anthorSum = sum;
+        // console.log(anthorSum(1,2));
+        // sum = null;
+        // console.log(anthorSum(1,2));
+
+        // let dog = {
+        //     year:1,
+        //     get age(){
+        //         return this.year
+        //     },
+        //     set age(newValue){
+        //         this.year = newValue
+        //     }
+        // }
+
+        // let des = Object.getOwnPropertyDescriptor(dog,'age');
+        // console.log(des.get.name);
+        // console.log(des.set.name);
+
+
+        // function making(name = 'Mark'){
+        //     name = 'Yuan';
+        //     return `Name is ${arguments[0]}`
+        // }
+
+        // console.log(making('zhaoyouting'))
+
+        // let num = 10;
+        // function foo(name = 'YuanYuan',age = num){
+        //     let num = 18;
+        //     return `Name is ${name},age is ${age}`
+        // }
+
+        // console.log(foo('zhaoyouting',20))
+
+        // const arr = [1,2,3,4,5];
+        // function foo(){
+        //     console.log(arguments.length)
+        // }
+
+        // foo(...arr)
+
+        // function getProduct(a,b,c = 1){
+        //     return a * b * c;
+        // }
+
+        // console.log(getProduct(...[1,2,3]))
+
+        // let getSum = (...arr) => {
+        //     return arr.reduce((x,y) => x + y ,0)
+        // }
+
+        // console.log(getSum(...arr));
+        // let str = 'hello world'
+        // console.log(str.split(' '));
+        // console.log(arr.slice(1,3))
+
+        // function foo(num){
+        //     if(num<=1){
+        //         return 1
+        //     }else{
+        //         return num * arguments.callee(num -1)
+        //     }
+        // }
+
+
+
+        // let bar = foo;
+        // foo = function() {
+        //     return 0
+        // }
+
+        // console.log(bar(5));
+        // console.log(foo(5));
+
+        // function Father(){
+        //     //Father
+        //     if(!new.target){
+        //         throw '未使用 new 关键字'
+        //     }
+        //     console.log('Yuanyuan is 18')
+        // }
+
+        // // Father();
+        // new Father();
+        // console.log(Father.toString())
+        // console.log(Father.valueOf())
+
+        // let foo = (function f(num){
+        //     if(num<=1){
+        //         return 1
+        //     }else{
+        //         return num * f(num-1)
+        //     }
+        // })()
+
+        // function fib(n){
+        //     return fibImpl(0,1,n)
+        // }
+
+        // function fibImpl(a,b,n){
+        //     if(n===0){
+        //         return a
+        //     }
+        //     return fibImpl(b,a+b,n-1)
+        // }
+
+        // console.log(fib(1));
+        // console.log(fib(2));
+        // console.log(fib(3));
+        // console.log(fib(100))
+
+
+        //私有变量
+        // function MyObject(){
+        //     let privateriable = 10;
+        //     function privateFunction(){
+        //         return  privateriable;
+        //     }
+        //     this.publicMethod = function(){
+        //         privateriable++;
+        //         return privateFunction();
+        //     }
+        // }
+        // let myObj = new MyObject();
+        // console.log(myObj.publicMethod());
+        // console.log(myObj)
+
+        // function Person(name){
+        //     this.getName = function(){
+        //         return name
+        //     }
+        //     this.setName = function(newValue){
+        //         name = newValue
+        //     }
+        // }
+
+        // let person = new Person('YuanYuan')
+        // console.log(person.getName())
+        // console.log(person.name)
+
+        // (function(){
+        //     let privateriable = 10;
+        //     function privateFunction(){
+        //         return false
+        //     }
+        //     MyObject = function(){
+
+        //     }
+        //     MyObject.prototype.publicMethod = function(){
+        //         privateriable++;
+        //         return privateFunction()
+        //     }
+        // })();
+        // console.log(new MyObject())
+
+      
+    </script>
+</body>
+</html>

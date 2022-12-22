@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // let Person = class PersonName{
+        //     identify(){
+        //         console.log(Person.name,PersonName.name)
+        //     }
+        // }
+        // let p = new Person();
+        //  p.identify();
+        // console.log(Person.name);
+        // console.log(PersonName.name)
+
+        // class Person {
+        //     constructor(overide){
+        //         this.foo = 'foo';
+        //         if(overide){
+        //             return {
+        //                 bar: 'bar'
+        //             }
+        //         }
+        //     }
+        // }
+
+        // let p1 = new Person();console.log(p1)
+        // let p2 = new Person(true); console.log(p2);
+
+        // let p3 =new p1.constructor();
+        // console.log(p3 instanceof Person);
+
+        // let p4 = new Person.constructor();
+        // console.log(p4);
+        // console.log(Person.constructor)
+        // console.log(p4 instanceof Person.constructor);
+
+        // let classList = [
+        //     class {
+        //         constructor(id){
+        //             this.id = id;console.log(`instance ${this.id}`)
+        //         }
+        //     }
+        // ]
+        // function createInstance(classDefinition,id){
+        //     return new classDefinition(id)
+        // }
+
+        // createInstance(classList[0],3141);
+
+
+        // let p5 = new class Foo{
+        //     constructor(id){
+        //         this.id = id;
+        //         console.log(`instance ${this.id}`);
+        //     }
+        // }(123);
+        // console.log(p5)
+
+        class SuperArray extends Array {
+            static get [Symbol.species](){
+                return Array
+            }
+            // shuffle(){
+            //     for(let i = this.length -1;i>0;i--){
+            //         let j = Math.floor(Math.random() * (i + 1));
+            //         [this[i],this[j]] = [this[j],this[i]];
+            //     }
+            // }
+        };
+        let a = new SuperArray(1,2,3,4,5);
+        let a2 = a.filter(x=> !!(x%2));
+       
+        console.log(a instanceof SuperArray);
+        console.log(a2 instanceof SuperArray);
+       // console.log(a)
+       // a.shuffle()
+       // console.log(a)
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>错误处理</title>
+</head>
+<body>
+   <script>
+
+    // function foo(){
+    //     try {
+    //        // return 2;
+    //        console.log(new Array(-20))
+    //     }catch(e){
+    //         if(e instanceof RangeError){
+    //             console.log('超出范围')
+    //         }
+    //     }finally {
+    //        return 0
+    //     }
+    // }
+    
+    //自定义类型错误
+    // class CusotmError extends Error {
+    //     constructor(message){
+    //         super(message);
+    //         this.name = "CusotmError";
+    //         this.message = message
+    //     }
+    // }
+    //   console.log(new CusotmError('My message'))
+
+    // function concat(str1,str2,str3){
+    //     let result = str1 + str2;
+    //     if(typeof str3 ==="string"){
+    //         result += str3;
+    //     }
+    //     return result
+    // }
+
+    // console.log(concat(1,2,"3"))
+
+    function reverseSort(values){
+        if(values && values instanceof Array){
+            values.sort();
+            values.reverse();
+        }
+        return values;
+    }
+
+    console.log([1,3,9,28,63,18,25,6])
+   </script> 
+</body>
+</html>

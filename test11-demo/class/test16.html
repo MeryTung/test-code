@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单-添加select</title>
+</head>
+<body>
+    <form method="get">
+        <select name="sel" id="sel">
+            <option value="1">星期一</option>
+            <option value="2">星期二</option>
+            <option value="3">星期三</option>
+        </select>
+        <input type="hidden" name="comments"/>
+        <input type="submit" value="提交"/>
+    </form>
+    <div class="editable" id="richedit1"  style="height:100px;width:100px;border: 1px solid black;" contenteditable>hello</div>
+    <iframe name="richedit" style="height:100px;width:100px;">
+    </iframe>
+    <button class="btn1">高亮富文本文字</button>
+    <script>
+        let sel = document.getElementById("sel");
+        let richedit1 = document.getElementById("richedit1");
+        richedit1.contentEditable = 'true';
+        document.execCommand('backcolor',false,'red')
+        // let newOption = document.createElement('option');
+        // newOption.appendChild(document.createTextNode('Option text'));
+        // newOption.setAttribute('value','Option Value');
+
+        //用构造函数创建
+        let newOption = new Option('Option text','Option Value');
+        let optionToMove = sel.options[1];
+        console.log(optionToMove)
+       // sel.add(newOption,undefined)
+       sel.insertBefore(optionToMove,sel.options[optionToMove.index+2])
+
+        //sel.appendChild(newOption)
+        window.addEventListener('load',(event)=>{
+            document.execCommand('backcolor',false,'red')
+            frames['richedit'].document.designMode = 'on';
+            frames['richedit'].document.execCommand('backcolor',false,'red')
+            frames['richedit'].document.execCommand('fontsize',false,'1-7');
+            frames['richedit'].document.execCommand('italic',false,null)
+        })
+        
+    
+        
+        document.querySelector('.btn1').addEventListener('click',()=>
+        {
+            let selection = frames['richedit'].getSelection();
+            let selectedText = selection.toString();
+            let range = selection.getRangeAt(0);
+      
+            
+            let span = frames['richedit'].document.createElement('span');
+            console.log('选择')
+            span.style.backgroundColor = 'red';
+            span.style.color='white';
+            range.surroundContents(span);
+        })
+ 
+
+            document.forms[0].addEventListener('submit',(e)=>{
+                let target = e.target;
+                target.elements['comments'].value = frames['richedit'].document.body.innerHTML;
+                
+            })
+     
+        
+                // saveSelection()
+//         function saveSelection(){
+//   if(window.getSelection){
+//     /*主流的浏览器，包括chrome、Mozilla、Safari*/
+//     var sel = window.getSelection();
+//     if(sel.rangeCount > 0){
+//       return sel.getRangeAt(0);
+//     }
+//   }else if(document.selection){
+//     /*IE下的处理*/
+//     return document.selection.createRange();  
+//   }
+//   return null;
+// };
+
+// var selectedRange = saveSelection();  
+    </script>
+</body>
+</html>

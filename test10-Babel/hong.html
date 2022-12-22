@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        var closeDoorCommand = {
+            execute: function(){
+                console.log('关上门')
+            }
+        };
+        var openDoorCommand = {
+            execute: function(){
+                console.log('开电脑')
+            }
+        };
+        var openQQCommand = {
+            execute: function(){
+                console.log('登录QQ')
+            }
+        };
+
+        var MacroCommand = function(){
+            return {
+                commandList:[],
+                add:function(command){
+                    this.commandList.push(command);
+                },
+                execute:function(){
+                    this.commandList.forEach(item=>{
+                        item.execute()
+                    })
+                }
+            }
+        };
+        var macroCommand = MacroCommand();
+        macroCommand.add(openDoorCommand);
+        macroCommand.add(openQQCommand);
+        macroCommand.add(closeDoorCommand);
+        macroCommand.execute();
+        
+    </script>
+</body>
+</html>

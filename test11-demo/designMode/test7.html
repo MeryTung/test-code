@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>装饰器</title>
+</head>
+<body>
+    <script>
+        var Plane = function () {}
+        Plane.prototype.fire = function () {
+            console.log('发射普通的子弹')
+        }
+
+        var MissleDecorator = function(plane){
+            this.plane = plane;
+        }
+        MissleDecorator.prototype.fire = function(){
+            this.plane.fire();
+            console.log('发射导弹')
+        }
+
+        var AtomDecrator = function(plane){
+            this.plane = plane;
+        }
+        AtomDecrator.prototype.fire = function(){
+            this.plane.fire();
+            console.log('发射原子弹')
+        }
+
+        var plane = new Plane();
+        plane = new MissleDecorator(plane);
+        plane = new AtomDecrator(plane)
+        plane.fire()
+    </script>
+</body>
+</html>

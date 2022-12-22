@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>状态模式</title>
+</head>
+<body>
+    <script>
+        function OffLightState(light,stateName){
+            this.light = light;
+            this.stateName = stateName
+        }
+        OffLightState.prototype.buttonWarPress = function(){
+            console.log(this.stateName);
+            this.light.setState(this.light.weakLightState)
+        }
+
+        function WeakLightState(light,stateName){
+            this.light = light;
+            this.stateName = stateName
+        }
+        WeakLightState.prototype.buttonWarPress = function(){
+            console.log(this.stateName);
+            this.light.setState(this.light.strongLightState)
+        }
+
+        function StrongLightState(light,stateName){
+            this.light = light;
+            this.stateName = stateName
+        }
+        StrongLightState.prototype.buttonWarPress = function(){
+            console.log(this.stateName);
+            this.light.setState(this.light.offLightState)
+        }
+        function Light() {
+             this.offLightState = new OffLightState(this,'弱光');
+              this.weakLightState = new WeakLightState(this,'强光');
+              this.strongLightState = new StrongLightState(this,'关闭');
+              this.button = null
+         }
+         Light.prototype.init = function(){
+            var button = document.createElement('button'),
+                 self = this;
+                 this.button = document.body.appendChild(button);
+                 this.button.innerHTML ='开关';
+                 this.currState = this.offLightState;
+                 this.button.onclick = function(){
+                        self.currState.buttonWarPress();
+        
+                 } 
+            
+         }
+
+         Light.prototype.setState = function(newState){
+            this.currState = newState
+         }
+
+         var light = new Light();
+         light.init()
+    </script>
+    
+</body>
+</html>

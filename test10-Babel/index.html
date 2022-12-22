@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="div1">我是一个div</button>
+    <button id="execute">点击我打开电视</button>
+    <button id="undo">点击我关闭电视</button> 
+    <button id="chuang">点击创建</button>
+    <script>
+ 
+            var createLogin = (function(){
+                var div;
+                return function(){
+                    if(!div){
+                    div = document.createElement("div");
+                    div.innerHTML = 'hello';
+                    div.style.display = 'none';
+                    document.body.appendChild(div);
+                }
+                return div
+                }
+              
+            })()
+
+            var getSingle = function(fn){
+                var result;
+                return function(){
+            
+                    return result || (result = fn.apply(this, arguments));
+                }
+            }
+
+
+            var createLoginSingle = function(){
+                var div = document.createElement("div");
+                div.innerHTML = 'hello';
+                div.style.display = 'none';
+                document.body.appendChild(div);
+               return div
+            }
+
+            var creatSingleLoginLayer = getSingle(createLoginSingle);
+            var bindEvent = getSingle(function(){
+               // document.getElementById('div1').addEventListener = function(){
+                    alert('click')
+              //  }
+                return true;
+            })
+            var render = function(){
+                console.log('开始渲染列表');
+                bindEvent();
+            }
+            // render();
+            // render();
+            // render();
+
+            document.getElementById('chuang').onclick = function(){
+                // var loginLayer = createLogin();
+                var loginLayer = creatSingleLoginLayer()
+                loginLayer.style.display = 'block'
+            }
+            var CreateDiv = function(html){
+                this.html = html;
+                this.init();
+            }
+            CreateDiv.prototype.init = function(){
+                var div = document.createElement("div");
+                div.innerHTML = this.html;
+                document.body.appendChild(div);
+            }
+            
+
+         var ProxySingleCreateDiv = (function(){
+            var instance;
+            return function(html){
+                if(!instance){
+                    instance = new CreateDiv(html);
+                }
+                console.log(instance)
+                return instance;
+            }
+           
+         })()
+         var a = new ProxySingleCreateDiv('yuanyuan');
+         var b = new ProxySingleCreateDiv('youting');
+        //  console.log(a === b)
+
+
+         var user = (function(){
+            var _name ='yuanyuan',
+                _age = 30;
+                return {
+                    getUserInfo:function(){
+                        return _name + ' - ' + _age
+                    }
+                }
+         })()
+
+         function createStorage (){}
+         var Storage =(function(){
+            var instance;
+            return function(){
+                if(!instance){
+                    return instance = new createStorage();
+                }
+                return instance
+            }
+         })()
+
+         createStorage.prototype.setItem = function(key, value){
+            return localStorage.setItem(key, value)
+         }
+         createStorage.prototype.getItem = function(key){
+            return localStorage.getItem(key)
+         }
+         Storage().setItem(name,'youting')
+        //  console.log(Storage().getItem(name))
+
+        //  var calculateBonus = function(performanceLevel,salary){
+        //     if(performanceLevel==='S'){
+        //         return salary * 4
+        //     }
+        //     if(performanceLevel==='A'){
+        //         return salary * 3
+        //     }
+        //     if(performanceLevel==='B'){
+        //         return salary * 2
+        //     }
+        //  }
+
+         var calculateBonus = {
+            "S":function(salary){
+                return salary * 4
+            },
+            "A":function(salary){
+                return salary * 3
+            },
+            "B":function(salary){
+                return salary * 2
+            }
+         }
+         function tqcalculateBonus(tag,salary){
+                return calculateBonus[tag](salary)
+         }
+
+        //  console.log('B级',calculateBonus('B',200))
+        console.log(tqcalculateBonus('B',200))
+       
+         function PerformancelS(){}
+         PerformancelS.prototype.calculate = function(salary){
+            return salary * 4
+         }
+
+         function PerformancelA(){}
+         PerformancelA.prototype.calculate = function(salary){
+            return salary * 3
+         }
+
+         function Bonus(){
+            this.salary = null;
+            this.strategy = null;
+         }
+
+         Bonus.prototype.setSalary = function(salary){
+            this.salary = salary
+         }
+         Bonus.prototype.setStrategy = function(strategy){
+            this.strategy = strategy
+         }
+
+         Bonus.prototype.getBonus = function(){
+            if(!this.strategy){
+                throw new Error('未设置strategy 属性')
+            }
+            return this.strategy.calculate(this.salary)
+         }
+
+         var bonus = new Bonus();
+         bonus.setSalary(200);
+         bonus.setStrategy(new PerformancelA());
+         console.log(bonus.getBonus());
+        // var cost = (function(){
+        //     var args = [];
+        //     return function(){
+        //         if(arguments.length===0){
+        //         var money = 0;
+        //         for(var i = 0; i < args.length; i++){
+        //             money += args[i]
+        //         }
+        //         return money;
+        //     }else{
+        //         [].push.apply(args, arguments)
+        //     }
+        //     }
+           
+        // })()
+
+
+        // cost(100);
+        // cost(200);
+        // cost(300);
+        // console.log('cost',cost())
+
+        var currying = function(fn){
+            var args = [];
+            return function(){
+              if(arguments.length === 0){
+                return fn.apply(this, args)
+              }else{
+                [].push.apply(args,arguments);
+                return  arguments.callee
+              }
+            }
+        }
+        var cost = (function(){
+            var money = 0;
+            return function(){
+                for(var i = 0; i < arguments.length; i++){
+                    
+                    money += arguments[i]
+                }
+                return money
+            }
+        })();
+
+        var cost = currying(cost)
+        cost(100)
+        cost(200)
+        cost(300)
+        console.log(cost())
+
+
+        Function.prototype.uncurrying = function(fn){
+            var self = this;
+            return function(){
+                var obj = Array.prototype.shift.call(arguments)
+                return self.apply(obj, arguments)
+            }
+        }
+
+        var call = Function.prototype.call.uncurrying();
+        var fn = function(name){
+            console.log(name)
+        }
+
+        console.log(call(fn,window,'yuanyuan'))
+
+        var isType = function(type){
+            return function(obj){
+                console.log(obj)
+                console.log(Object.prototype.toString.call(obj) )
+                return Object.prototype.toString.call(obj) === `[object ${type}]`;
+            }
+        }
+
+        // var isArray = isType( 'Array' );
+        // var isString = isType( 'String' );
+        // console.log(isArray( [1,2,3] ))
+        // console.log(isString( 'hello' ))
+
+        var Type = {};
+        for(var i = 0,type;type = ['String','Array','Object'][i++];){
+            (function(){
+                // console.log(type)
+                Type['is'+type] = function(obj){
+                    return Object.prototype.toString.call(obj) === `[object ${type}]`;
+                }
+            })(type)
+        }
+
+        // console.log(Type.isArray([1,2,3]))
+
+
+        // for(var i = 0;i<5;i++){
+        //     (function(){
+        //         console.log('i',i)
+        //     })(i)
+        // }
+
+        
+     function throttle(fn,interval){
+          let timer = null;
+          let last = 0;
+          return function(){
+            var args = arguments,
+            _me = this;
+            let now = +new Date();
+            if(timer){
+                clearTimeout(timer);
+                timer = null
+            }
+            if(now-last < interval){
+                timer = setTimeout(function(){
+                last = now;
+                fn.apply(_me,args);  
+            },interval)
+            }else{
+              last = now;
+              fn.apply(_me,args)
+          }
+      }
+    }
+
+      window.onresize = throttle(function(){
+        console.log(1)
+      },3000);
+
+     function timeChunk(ary,fn,count){
+        let obj,timer;
+
+        var start = function(){
+            for(var i= 0 ;i<Math.min(count||1,ary.length); i++){
+            obj = ary.shift();
+            fn(obj)
+        }
+        }
+        return function(){
+            timer = setInterval(function(){
+                if(ary.length === 0){
+                    return clearInterval(timer)
+                }
+            start()
+        },200)
+        }
+     }
+    
+
+     var ary = [];
+     for(var j = 0;j<20;j++){
+        ary.push(j)
+     }
+
+     var renderFriendList = timeChunk(ary,function(){
+        var div = document.createElement('div');
+        div.innerHTML = '<p>123</p>';
+        document.body.appendChild(div)
+     },8)
+ 
+        
+
+        var TV = {
+            open:function(){
+                console.log('打开电视机')
+            },
+            close:function(){
+                console.log('关闭电视机')
+            }
+        }
+
+    //     var OpenTvCommand = function(receiver){
+    //         this.receiver = receiver
+    //     }
+    //    OpenTvCommand.prototype.execute = function(){
+    //         this.receiver.open()
+    //     }
+
+    //     OpenTvCommand.prototype.undo = function(){
+    //         this.receiver.close()
+    //     }
+        
+        var createCommand = function(receiver){
+            var execute = function(){
+                return receiver.open()
+            }
+            var undo = function(){
+                return receiver.close()
+            }
+            return {
+                execute: execute,
+                undo: undo
+            }
+        }
+
+        var setCommand = function(command){
+            document.getElementById('execute').onclick = function(){
+                command.execute();
+            }
+            document.getElementById('undo').onclick = function(){
+                command.undo()
+            }
+        }
+
+        // setCommand(new OpenTvCommand(TV))
+        setCommand(createCommand(TV))
+
+
+        // document.getElementById = (function(func){
+        //     return function(){
+        //         console.log(arguments)
+        //         console.log(document.getElementById)
+        //         return func.apply(document,arguments);
+        //     }
+        // }(document.getElementById));
+        // var getId = document.getElementById;
+        // var div1 = getId('div1')
+        // console.log(div1.id);
+
+
+        // Function.prototype.bind = function(context){
+        //     var self = this
+        //     return function(){
+        //         return  self.apply(context, arguments)
+        //     }
+        // }
+
+        // Function.prototype.bind = function(){
+        //     console.log(arguments)
+        //     var self = this;
+        //     var context = [].shift.call(arguments);
+        //     console.log(arguments)
+        //     var args = [].slice.call(arguments);
+                
+        //         return function(){
+        //             return self.apply(context, [].concat.call(args,[].slice.call(arguments)))
+        //         }
+        // }
+        // var obj = {
+        //     name: 'yuanyuan'
+        // }
+        // var func = function(){
+        //     return this.name
+        // }.bind(obj);
+        // console.log(func())
+
+        // var func1 = function(a,b,c,d){
+        //     console.log(this.name);
+        //     console.log([a,b,c,d])
+        // }.bind(obj,1,2)
+        // console.log(func1(3,4));
+
+        // (function() {
+        //     Array.prototype.push.call(arguments,2,3);
+        //     console.log(arguments)
+        // })(1,4)
+
+        // var a = 1 ;
+        // Array.prototype.push.call(a,'hello');
+        // console.log(a.length);
+        // console.log(a[0])
+        // var func2 = function(){}
+        // Array.prototype.push.call(func2,'hello');
+        // console.log(func2.length);
+        // console.log(func2)
+        
+    //    var mutil = (function(){
+    //     var cache = {};
+    //     var a = 1;
+    //     var calculate = function(){
+    //         for(var i = 0, l = arguments.length;i<l;i++){
+    //         a = a * arguments[i];
+    //         }
+    //         return a 
+    //     }
+        
+    //     return  function(){
+    //     var args = Array.prototype.join.call(arguments,',');
+            
+    //     if(args in cache){
+    //         return cache[args]
+    //     }
+    //     cache[args] = calculate.apply(null, arguments);
+    //     return  cache[args]
+            
+    //     }
+    //    })()
+    //    console.log(mutil(1,2,3))
+    
+
+    //    //延续局部变量的寿命
+    //    var report = (function(){
+    //     var imgs = [];
+    //     return function(){
+    //         var img = new Images();
+    //         imgs.push(img);
+    //         img.src = src;
+    //     }
+    //    })()
+
+
+    //    var extend = (function(){
+    //     var value = 0;
+    //     return {
+    //         call:function(){
+    //             value++
+    //             console.log(value)
+    //         }
+    //     }
+    //    })()
+    
+
+    //    var extend =  {
+    //     value:0,
+    //     call:function(){
+    //         this.value++;
+    //         console.log(this.value)
+    //     }
+    //    }
+    // var Extend = function(){
+    //     this.value = 0
+    // };
+    // Extend.prototype.call = function(){
+    //     this.value++;
+    //     console.log(this.value)
+    // }
+    // var extend = new Extend();
+    //    extend.call();
+    //    extend.call();
+    //    extend.call();
+    // </script>
+</body>
+</html>

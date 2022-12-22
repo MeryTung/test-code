@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>代理模式</title>
+</head>
+<body>
+    <input type="checkbox" id="1" />1
+    <input type="checkbox" id="2"/>2
+    <input type="checkbox" id="3" />3
+    <input type="checkbox" id="4"/>4
+    <input type="checkbox" id="5" />5
+    <input type="checkbox" id="6"/>6
+    <input type="checkbox" id="7" />7
+    <input type="checkbox" id="8"/>8
+
+    <div id="father">
+        <a href="#">链接1号</a>
+        <a href="#">链接2号</a>
+        <a href="#">链接3号</a>
+        <a href="#">链接4号</a>
+        <a href="#">链接5号</a>
+        <a href="#">链接6号</a>
+      </div>
+   <script type="text/javascript">
+    var father = document.getElementById('father');
+      father.onclick = function(e){
+       if(e.target.tagName === 'A'){
+        console.log('点击了我')
+       }
+    }
+
+    var proxyLink = (function(){
+        
+    })
+    var synchronousFile = function(id){
+        console.log('开始同步文件，id为' + id)
+    }
+
+
+    var proxySynchronousFile = (function(){
+        var cache = [], timer;
+        return function(id){
+            cache.push(id)
+            if(timer){
+                return 
+            }
+            timer = setTimeout(function(){
+                synchronousFile(cache.join(','));
+                clearTimeout(timer);
+                timer = null;
+                cache.length = 0;
+            },2000)
+        }
+
+    })()
+
+    var checkbox = document.getElementsByTagName('input');
+    for(var i = 0,c; c = checkbox[i++]; ){
+        c.onclick = function(){
+            if(this.checked){
+            proxySynchronousFile(this.id)
+             }
+        }
+    }
+
+    var hander = function(ev){
+        if(ev.keyCode == 113){
+            console.log('hello')
+            var script = document.createElement('script');
+            script.onload = function(){
+                for(var i = 0,fn; fn = cache[i++]; ){
+                    fn()
+                }
+            }
+            script.src='./test1.js';
+           // document.getElementsByTagName('head')[0].appendChild(script);
+            document.body.appendChild(script);
+        }
+    }
+
+    document.body.addEventListener('keydown',hander,false);
+
+    //懒加载代理模式
+        // var myImage = (function(){
+        //     var imgNode = document.createElement("img");
+        //     document.body.appendChild(imgNode);
+        //     return {
+        //         setSrc: function(src){
+        //             imgNode.src = src;
+        //         }
+        //     }
+        // })()
+        
+        // var proxyImage = (function(){
+        //     var img = new Image();
+        //     img.onload = function(){
+        //         myImage.setSrc(this.src)
+        //     }
+        //     return {
+        //         setSrc: function(src){
+        //             myImage.setSrc('./img/loading.gif');
+        //             img.src = src
+        //         }
+        //     }
+        // })()
+
+        // proxyImage.setSrc('https://desk-fd.zol-img.com.cn/t_s2880x1800c5/g7/M00/0F/0A/ChMkK2MzrYOIYrIwAFUgq7fcq4AAAH-LQJtYUEAVSDD120.jpg')
+       
+   </script> 
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="myDiv">
+        <!-- p标签 -->
+        <p>元素节点和文本节点</p>
+        <span><![CDATA[This is some content.]]></span>
+        <div class="box">
+            <p>1</p>
+        </div>
+        <ul class="myList">
+            <li>item 1</li>
+            <li>item 2</li>
+            <li>item 3</li>
+        </ul>
+        <img src="../img/code.png" name="picture" alt="图片"/>
+    </div>
+   <script>
+    // let myDiv = document.getElementById("myDiv");
+    //  let img = document.createElement('img');
+    //  img.src="../img/code.png"
+    // let returnedNode = myDiv.appendChild(img);
+    // console.log(returnedNode == img);
+    // console.log(myDiv.lastChild == img);    
+    // returnedNode = myDiv.insertBefore(img,myDiv.firstChild)
+    // returnedNode = myDiv.insertBefore(img,myDiv.lastChild)
+    // console.log(img ==myDiv.childNodes[myDiv.childNodes.length -2]);
+    // console.log(myDiv.lastChild)
+    // returnedNode = myDiv.replaceChild(img,myDiv.lastChild);
+
+    // let myList = document.querySelector('.myList');
+    // let deepList = myList.cloneNode(true);
+
+
+
+    // console.log(deepList);
+    //  myDiv.appendChild(deepList);
+
+    //  console.log(myDiv.childNodes)
+
+    // let fragment = document.createDocumentFragment();
+    // fragment.appendChild(img)
+    // fragment.appendChild(myDiv);
+    // console.log(fragment);
+
+    //  let images = document.getElementsByTagName('img');
+    //  console.log(images.namedItem('picture'));
+    //  let element = document.createElement('div');
+    //  element.className = 'message';
+
+    //  let textNode = document.createTextNode('Hello JavaScript!');
+    //  element.appendChild(textNode);
+
+    //  let anthorTextNode = document.createTextNode('Yippee!');
+    //  element.appendChild(anthorTextNode);
+
+    //  document.body.appendChild(element);
+
+    //  console.log(element.childNodes.length);
+
+    //  element.normalize();
+    //  console.log(element.childNodes.length);
+
+    //  console.log(element.firstChild.nodeValue);
+    //  let newNode = element.firstChild.splitText(5);
+    //  console.log(newNode.nodeValue);
+    //  console.log(element.firstChild.nodeValue)
+
+
+
+
+
+    //returnedNode = myDiv.removeChild(img);
+
+    //console.log(window.navigator.userAgent)
+    // let p;
+    // navigator.geolocation.getCurrentPosition((position) => p = position,(e)=>{
+    //     console.log(e.code);
+    //     console.log(e.message)
+    // },{enableHighAccuracy:true});
+    // setTimeout(()=> console.log(p),5000)
+//     if (navigator.onLine) {
+//   console.log('online');
+// } else {
+//   console.log('offline');
+// }
+//     const connectStateChange = () => console.log(navigator.onLine);
+//     window.addEventListener('offline', (e) => { console.log('offline'); });
+//     window.addEventListener('online', (e) => { console.log('online'); });
+
+    // let myDiv = document.getElementById('myDiv');
+    // console.log(myDiv.nodeName);
+    // console.log(myDiv.nodeValue);
+    // console.log(myDiv.nodeType);
+    // console.log(myDiv.childNodes);
+    // console.log(myDiv.childNodes.item(1))
+    // function foo(){
+    //     console.log(`this.name:${this.name}`)
+    // }
+
+    // function dofoo(o){
+    //     obj.foo()
+    // }
+
+    // const name = "小红";
+    // const obj = {
+    //     name:"小蓝",
+    //     foo:foo
+    // }
+
+   
+    // dofoo(obj.name = name)
+    // var a = 10;
+    // var b = 20;
+
+    // let aa = 30;
+    // let bb = 40;
+    // const cc = 50;
+
+    // debugger;
+   </script> 
+</body>
+</html>

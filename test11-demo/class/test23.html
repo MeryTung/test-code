@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fetch</title>
+</head>
+<body>
+    <button class="btn">发表评论</button>
+   <script>
+    //https://zh.b-ok.global/book/5706582/d8f8e1?dsource=recommend zlibrary 世界最大数字图书馆网站做例
+    //  fetch('../json/userInfo.json')
+    //  .then((response)=>{
+    //     //获取响应信息
+    //     response.text().then((data)=>{
+    //         console.log(data)
+    //     })
+    //     console.log(response.url)
+    //     //  console.log(response.status);
+    //     //  console.log(response.statusText);
+    //     //  console.log(response.ok);
+    //     //  console.log(response.redirected)
+    //     //分派请求
+    //    // console.log(response)
+    //  },(err)=>{
+    //     console.log(err)
+    //  })
+
+    //常见fetch 请求模式
+    let btn = document.querySelector('.btn');
+    btn.addEventListener('click',(e)=>{
+        let payload = 'comment=123&author=yuanyuan&email=521547585@qq.com'
+    let jsonHeaders = new Headers({
+       // 'Content-Type': 'application/json'
+       'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'
+    })
+    fetch('/wp-comments-post.php',{
+        method: "POST",
+        body: payload,
+        headers: jsonHeaders
+    }).then((response)=>{
+        response.text().then((data)=>{
+            console.log(data)
+        })
+        response.redirect('https://www.baidu.com',200)
+        response.error()
+        console.log(response)
+    },(err)=>{
+        console.log(err)
+    })
+    })
+
+   // let seed = [['foo','bar'],['baz','qux']]
+//    let seed = {foo:'bar'}
+//     let h = new Headers(seed);
+//     let m = new Map();
+//     console.log(h.get('foo'));
+   
+//     h.append('name','yuanyuan');
+//     console.log(...h.keys());
+//     console.log(...h.entries());
+
+  
+   // console.log(m.get('foo'))
+    // h.set('foo','bar');
+    // m.set('foo','bar');
+
+    // console.log(h.has('foo'));
+    // console.log(h.has('qux'));
+    // console.log(m.has('foo'));
+    // console.log(m.has('qux'));
+
+    // h.set('foo','baz');
+    // console.log(h.get('foo'))
+    // h.delete('foo');
+
+    // console.log(h.get('foo'));
+
+
+    // let r1 = new Request('http://www.tanglu.com/wp-comments-post.php',{method:"POST",body:'foobar'});
+    // let r2 = new Request(r1)
+    // console.log(r1);
+    // console.log(r1.bodyUsed)
+    // console.log(r2)
+    // console.log(r2.bodyUsed)
+
+    // let r3 = new Response('foobar');
+    // let r4 = r3.clone();
+
+    // // r3.text().then(console.log); 
+    // // r3.text().then(console.log)
+    // r3.clone().text().then(console.log);
+    // r3.clone().text().then(console.log);
+    // r3.text().then(console.log)
+    // console.log(r3.bodyUsed);
+    // console.log(r4.bodyUsed)
+
+    // let r3 = new Response('foobar');
+    // let r4 = new Response(r3.body);
+    // console.log(r3.bodyUsed);
+    // console.log(r4.bodyUsed);
+    // r4.text().then(console.log);
+    // r3.text().then(console.log)
+
+    // fetch('https://fetch.spec.whatwg.org/')
+    //     .then((response)=> response.body)
+    //     .then(async function(body){
+    //         let reader = body.getReader();
+    //         while(true){
+    //             let {value,done} =await reader.read();
+    //             if(done){
+    //                 break
+    //             }
+    //             console.log({value,done})
+    //         }
+    //     })
+
+        fetch('https://fetch.spec.whatwg.org')
+            .then((response)=>response.body)
+            .then(async function(body){
+                let reader = body.getReader();
+                let asyncIterable = {
+                    [Symbol.asyncIterator](){
+                        return {
+                            next(){
+                               return reader.read()
+                            }}
+                    }
+                }
+                for await(chunk of asyncIterable){
+                    console.log(chunk)
+                }
+            })
+    
+ 
+   </script> 
+</body>
+</html>

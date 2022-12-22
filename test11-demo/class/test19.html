@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>localStorage</title>
+</head>
+<body>
+  <button class="btn">click me</button>
+  <a href="http://www.tanglua.com/test18.html" target="_blank">test18</a>
+   <script>
+    //  localStorage.setItem("name",'YuanYuan');
+    //  localStorage.setItem("books","Java/Javascript")
+    //  console.log(localStorage.getItem("name"));
+    //  localStorage.removeItem("name");
+    //  localStorage.clear()
+    let btn = document.querySelector('.btn');
+    btn.addEventListener("click",(e)=>{
+      localStorage.setItem("name","zhaoyouting")
+    })
+    localStorage.setItem("name","YuanYuan");
+    localStorage.book = "Javascript";
+   // delete sessionStorage.book;
+   // sessionStorage.clear();
+   
+   window.addEventListener('storage',(event)=>{
+      console.log(123)
+      console.log(`Storage changed for ${event}`)
+    })
+   </script> 
+</body>
+</html>

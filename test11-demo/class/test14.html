@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dom</title>
+</head>
+<body >
+   
+    <div id="content" class="myDiv page1">
+        <span class="id1">nodelist</span>
+        <p >123</p>
+        <input type="text" />
+        <button id="myButton">click me</button>
+    </div>
+   <script>
+
+
+    //html5 css类扩展
+     let mydiv = document.getElementById('content');
+     mydiv.dataset.appid = 23456
+    // console.log(mydiv)
+    // console.log(mydiv.className)
+    // let classNames = mydiv.className.split(/\s+/);
+    // let idx = classNames.indexOf('page1');
+    // console.log(idx)
+    // if(idx>-1){
+    //     classNames.splice(idx,1)
+    // }
+    // mydiv.className = classNames.join(' ');
+
+    //classlist
+  //  mydiv.classList.add('foo')
+    //console.log(mydiv.classList.contains('myDiv'));
+      //  mydiv.classList.remove('page1');
+    //     mydiv.classList.toggle('page1');
+    //     let button = document.getElementById('myButton');
+    //     button.focus();
+    //     console.log(document.hasFocus());
+    //     console.log(document.activeElement === button)
+    // mydiv.innerHTML = "_<script defer>console.log('hi')<\/script>";
+        mydiv.insertAdjacentHTML('beforeend',"<p>Hello world!</p>");
+        mydiv.insertAdjacentText('beforeend',"Hello world!");
+   
+    //let observer = new MutationObserver((mutationRecords)=>mutationRecords.map(x=>console.log(x.target)))
+    //let observer = new MutationObserver(()=>console.log('<body> attributes changed'))
+    // let childA = document.createElement('div');
+    // let childB = document.createElement('span');
+    // document.body.appendChild(childA);
+    // document.body.appendChild(childB);
+
+    // observer.observe(childA,{attributes:true})
+    // observer.observe(childB,{attributes:true})
+
+   
+    // setTimeout(()=>{
+    //     observer.disconnect();
+    //     childA.className = 'baz'
+    //     childA.setAttribute('foo','bar');
+    //     childB.setAttribute('foo','bar');
+    // },0)
+
+    // setTimeout(() => {
+    //     observer.observe(childA,{attributes:true})
+    //     observer.observe(childB,{attributes:true})
+    //     childA.setAttribute('foo','bar');
+    //     childB.setAttribute('foo','bar');
+    // })
+
+    // console.log(observer.takeRecords())
+    // let mydiv = document.querySelector('.myDiv')
+    // let currentChildNode = mydiv.firstChild;
+    // let currentChildNode2 = mydiv.firstElementChild;
+    // console.log(currentChildNode);
+    // console.log(currentChildNode2)
+   // console.log(mydiv.matches(".page1"))
+    
+        //MutationObserver
+      //  let observer = new MutationObserver((mutationRecords,mutationObservers) => console.log(mutationRecords,mutationObservers))
+       //     observer.observe(document.body,{attributes:true});
+
+           // document.body.className = 'bar';
+          //  document.body.setAttribute('foo','bar');
+          //  document.body.className = 'baz';
+         //  documentsetTimeout(()=>{
+          //      observer.disconnect();
+         //      document.body.className = 'foo';
+          //  },0);
+            
+           // document.body.className = 'bar';
+          //  console.log('Changed body class');
+        //使用NodeList
+        // let div =document.getElementsByTagName('div');
+        // for(let i = 0; i < div.length; i++){
+        //     let newDiv =document.createElement('div');
+        //     document.body.appendChild(newDiv);
+        // }
+        // for(let div of document.getElementsByTagName('div')){
+        //     let newDiv = document.createElement('div');
+        //     document.body.appendChild(newDiv)
+        // }
+        // for(let i= 0,len = div.length; i < len; i++){
+        //     let newDiv = document.createElement('div');
+        //     document.body.appendChild(newDiv)
+        // }
+
+
+
+   </script> 
+</body>
+</html>

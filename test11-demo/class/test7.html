@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>事件</title>
+</head>
+<body>
+    <button id="btn">reload</button>
+    <textarea class="event-log-contents" row="15" cols="40"></textarea>
+    <script>
+        // const log = document.querySelector('.event-log-contents');
+        // let btn = document.getElementById('btn');
+        // btn.addEventListener('click',(e)=>{
+        //     log.textContent = ''
+        //     window.setTimeout(()=> {
+        //         window.location.reload();
+        //     },200)
+        // });
+        // window.addEventListener('load',(e)=>{
+        //     log.textContent = log.textContent + 'load \n'
+        // })
+
+        // document.addEventListener('readystatechange',(e)=>{
+        //     log.textContent = log.textContent +`readyState: ${document.readyState}\n`;
+        // });
+        // document.addEventListener('DOMContentLoaded',(e)=> {
+        //     log.textContent = log.textContent + `DOMContentLoaded\n`
+        // })
+       
+        window.addEventListener('pageshow',(e)=>{
+            console.log('after,pageshow',e)
+        });
+        window.addEventListener('hashchange',(e)=> {
+            console.log(`${e.oldURL}---${e.newURL}`)
+            console.log(`Current hash: ${location.hash}`)
+        })
+        window.addEventListener('load',()=>{
+            console.log('Load fired')
+        })
+       
+    </script>
+</body>
+</html>

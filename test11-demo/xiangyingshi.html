@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        const bucket = new WeakMap();
+        // const data = {ok:false,text: 'hello world'};
+        const data = {foo: 'Vue', bar: 'world'};
+        let activeEffect;
+        const obj = new Proxy(data,{
+            get(target,key){
+                let despMap = bucket.get(target);
+                if(!despMap){
+                    bucket.set(target,(despMap = new Map()))
+                };
+                let desp = despMap.get(key);
+                if(!desp){
+                    despMap.set(key,(desp = new Set()));
+                };
+                desp.add(activeEffect);
+                activeEffect.deps.push(desp);
+                return target[key];
+            },
+            set(target,key,newValue){
+                target[key] = newValue;
+                let despMap = bucket.get(target);
+                if(!despMap) return ;
+                const effects = despMap.get(key);
+                const effectToRun = new Set(effects);
+                effectToRun.forEach((effectFn => effectFn()))
+                //effects && effects.forEach(fn=>fn())
+            }
+        })
+        function effect(fn){
+          const effectFn = () => {
+            cleanUp(effectFn);
+            activeEffect = effectFn;
+            fn();
+          }
+          effectFn.deps = [];
+          effectFn();
+        }
+
+        function cleanUp(effectFn){
+            for(let i = 0;i<effectFn.deps.length;i++){
+                const deps = effectFn.deps[i];
+                deps.delete(effectFn);
+            }
+            effectFn.deps.length = 0 ;
+        }
+        // effect(()=>{document.body.innerHTML = obj.ok ? obj.text : 'not'});
+        // setTimeout(()=>{ obj.text ='hello,vue'},5000)
+
+        let temp1, temp2
+
+ // effectFn1 嵌套了 effectFn2
+ effect(function effectFn1() {
+ console.log('effectFn1 执行')
+
+ effect(function effectFn2() {
+ console.log('effectFn2 执行')
+ // 在 effectFn2 中读取 obj.bar 属性
+  temp2 = obj.bar
+ })
+ // 在 effectFn1 中读取 obj.foo 属性
+ temp1 = obj.foo
+ })
+ setTimeout(() => {obj.bar = 'javascript'},2000)
+        // const bucket = new Set();
+        // const data = {text:'hello,Vue!'};
+        // const effect = function(){
+        //     document.body.innerText = obj.text
+        // }
+        // let activeEffect;
+        // function effect(fn){
+        //     activeEffect = fn;
+        //     fn();
+        // }
+        // const obj = new Proxy(data,{
+        //     get(target,key){
+        //         bucket.add(activeEffect);
+        //         return target[key]
+        //     },
+        //     set(target,key,newValue){
+        //         target[key] = newValue;
+        //         bucket.forEach(fn=>fn());
+        //         return true
+        //     }
+        // });
+        // effect(()=> { document.body.innerText = obj.text });
+        // console.log(effect);
+        // setTimeout(()=> obj.noExist = 'hello,world',2000);
+        // const map = new Map();
+        // const weakMap = new WeakMap();
+        // (function(){
+        //     const foo = {foo:1};
+        //     const bar = {bar:2};
+        //     map.set(foo);
+        //     weakMap.set(bar);
+        // })()
+    </script>
+</body>
+</html>

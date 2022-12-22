@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>表单</title>
+</head>
+<body>
+    <form method="post" id="myForm" novalidate>
+        <label for="username">用户名：</label><input type="text" name="username" placeholder="输入名字"  size='8' maxlength="10" required/>
+        <label for="tel">电话号码：</label>
+        <input type="text" name="tel1" id="txtTel1" maxLength="3"/>
+        <input type="text" name="tel2" id="txtTel2" maxLength="3"/>
+        <input type="text" name="tel3" id="txtTel3" maxLength="3"/>
+        <textarea name="content" rows="25" cols="10"></textarea>
+        <input type="email" name="email"/>
+        <input type="url" name="url"/>
+        <input type="reset" value="重置"/>
+        <input type="number" min="0" max="100" step="5" name="count"/>
+
+        <select name="sel">
+            <option value="1">星期一</option>
+            <option value="2" selected>星期二</option>
+            <option value="3">星期三</option>
+            <option value="4">星期四</option>
+        </select>
+        <button type="submit" value="提交" name="sbmit-btn" class="btn1">提交</button>
+    </form>
+   <script>
+     let form = document.getElementById('myForm');
+     let btn = document.querySelector('.btn1');
+     console.log(document.forms[0].elements[0].required);
+     
+      let selectbox = document.forms[0].elements['sel'];
+      let idx = selectbox.selectedIndex;
+      let selectedOptions = getSelectedOptions(selectbox);
+      selectbox.addEventListener('change',(e)=>{
+       // console.log(selectbox.options[idx].text)
+       getSelectedOptions(selectbox)
+      })
+
+      function getSelectedOptions(selectIndex){
+        let result = [];
+        for(let option of selectbox.options){
+            if(option.selected){
+                result.push(option)
+            }
+        }
+        return result;
+      }
+
+      for(let option of selectedOptions){
+        console.log(option.value,option.text)
+      }
+      
+
+    //  window.addEventListener('load',(e)=>{
+    // //    form.elements[0].focus()
+    // let element = document.forms[0].elements[0];
+    // if(element == true){
+    //     element.blur();
+    //     console.log('JS focus')
+    // }
+    //  })
+    //  form.addEventListener('submit',(e)=>{
+    //    // e.preventDefault();
+    //  });
+    //  form.addEventListener('reset',(e)=>{
+    //     e.preventDefault();
+    //  })
+    //  console.log(btn);
+    //  btn.addEventListener('click',(e)=>{
+    //     console.log('提交表单');
+    //     btn.disabled = true;
+    //  });
+    //  form.reset();
+
+    //  let field1= form.elements[0];
+    //  let textbox1 = form.elements['content'];
+        //  let textbox1 = document.forms[0].elements['content'];
+        // textbox1.select()
+        // textbox1.addEventListener('keypress',(event)=>{
+        //     console.log(123)
+        // })
+        // textbox1.addEventListener('paste',(event)=>{
+        //     console.log('黏贴了');
+        //     let val = textbox1.value;
+        //     if((/^\d*/).test(val)){
+        //         event.preventDefault();
+        //     }
+           
+        // })
+        // let txtTel1 = document.getElementById('txtTel1');
+        // let txtTel2 = document.getElementById('txtTel2');
+        // let txtTel3 = document.getElementById('txtTel3');
+       
+
+        // function tabForward(event){
+           
+        //     let target = event.target;
+        //     if(target.value.length == target.maxLength){
+        //         let form = target.form;
+        //         for(let i = 0;i<form.elements.length;i++){
+        //             if(form.elements[i] == target){
+        //                 if(form.elements[i+1]){
+        //                     form.elements[i+1].focus()
+        //                 }
+        //                 return;
+        //             }
+        //         }
+                
+        //     }
+        // }
+        // let inputIds =['txtTel1','txtTel2','txtTel3'];
+        // for(let id of inputIds){
+        //     let textbox = document.getElementById(id);
+        //     textbox.addEventListener('keyup',tabForward)
+        // }
+   </script> 
+</body>
+</html>

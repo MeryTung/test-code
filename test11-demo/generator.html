@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        // function* generate(){
+        //     yield 1;
+        //     yield 2;
+        //     return 3
+        // }
+
+        // let generateObj = generate();
+        // let generateObj2 = generate();
+        // console.log(generate()[Symbol.iterator]);
+        // console.log(generateObj.next());
+        // console.log(generateObj.next());
+        // console.log(generateObj.next());
+        // console.log(generateObj.next());
+
+        // console.log(generateObj2.next());
+        // for(let i of generate()){
+        //     console.log(i)
+        // }
+        
+
+        // function* generateFn(initial){
+        //     console.log(initial);
+        //     console.log(yield);
+        //     console.log(yield);
+        // }
+
+        // let generateObject = generateFn('foo');
+        // generateObject.next('bar');
+        // generateObject.next('baz');
+        // generateObject.next('qux');
+
+        // function* generateObj3(){
+        //     return yield 'foo'
+        // }
+        // let generatorObject2 = generateObj3();
+        // console.log(generatorObject2.next());
+        // console.log(generatorObject2.next('baz'));
+
+        // function* generate(n){
+        //     let i = 0;
+        //     while(n--){
+        //         yield i++
+        //     }
+        //     // for(let i = 0; i < n; i++){
+        //     //     yield i
+        //     // }
+        // }
+
+        // let generateFn = generate(3);
+        // for(let i of generateFn){
+        //     console.log(i                                                  )
+        // }
+
+        // function* rang(start,end){
+        //     while(end>start){
+        //         yield start++;
+        //     }
+        // }
+        // for(let i of rang(4,7)){
+        //     console.log(i)
+        // }
+
+        // function* generatorFnB(){
+        //     // yield* [1,2,3]
+        //     console.log('iter value:',yield* [1,2,3])
+        // }
+        // for(let i of generatorFnB()){
+        //     console.log(i)
+        // }
+
+        // function* innerGeneratorFnB(){
+        //         yield 1;
+        //         return 2;
+        // }
+        // function* outGeneratorFn(genObj){
+        //     console.log('iter value:',yield* innerGeneratorFnB())
+        // }
+        // for(let i of outGeneratorFn()){
+        //     console.log('value:',i)
+        // }
+
+        class Node {
+            constructor(id){
+                this.id = id;
+                this.neighbors = new Set();
+            }
+            connect(node){
+                if(node !==this){
+                    this.neighbors.add(node);
+                    this.neighbors.add(this);
+                }
+            }
+        }
+
+        class RandomGraph {
+            constructor(size){
+                this.nodes = new Set();
+                for (let i = 0;i < size;++i){
+                    this.nodes.add(new Node(i))
+                }
+                const threshold = 1 /size;
+                console.log(this.nodes);
+                for(const x of this.nodes) {
+                    console.log('x',x)
+                    for(const y of this.nodes){
+                        console.log('y',y)
+                        if(Math.random() < threshold){
+                            x.connect(y)
+                        }
+                    }
+                }
+            }
+            print(){
+                for(const node of this.nodes){
+                    const ids = [...node.neighbors].map((n)=>n.id).join(',');
+                    console.log(`${node.id}:${ids}`)
+                }
+            }
+        }
+
+        const g = new RandomGraph(6);
+        g.print()
+    </script>
+</body>
+</html>

@@ -4,7 +4,8 @@
   <!-- <nameSpaceTest /> -->
   <!-- <componentTest /> -->
   <!-- <CounterControls /> -->
-  <TestControl />
+  <!-- <TestControl /> -->
+  <div>{{message}}</div>
 </template>
 
 <script>
@@ -13,18 +14,27 @@
 // import nameSpaceTest from './views/nameSpaceTest.vue'
 // import componentTest from './views/componentTest.vue'
 // import CounterControls from './views/CounterControls.vue'
-import  TestControl from './views/TestControl.vue'
-
+// import  TestControl from './views/TestControl.vue'
+import { onMounted } from 'vue'
 export default {
   name: 'App',
-  components: {
+  // components: {
     // IndexTest
     // moduleTest
     // nameSpaceTest
     // componentTest
     // CounterControls,
-    TestControl
+    // TestControl
+  // },
+  setup(){
+   onMounted(()=>{
+      console.log('onmounted')
+    })
+    return {
+      message: 'hello world'
+    }
   }
+   
 }
 </script>
 

@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>类-理解对象</title>
+</head>
+<body>
+    <script>
+        // 'use strict';
+        // const  person = {};
+        // Object.defineProperty(person,'name',{
+            // writable: false,
+        //     configurable: false,
+        //     value: 'YuanYuna'
+        // });
+        // Object.defineProperty(person,'name',{
+        //     configurable:true,
+        //     value: 'YouTing'
+        // })
+        // person.name = 'Mark';
+        // delete person.name;
+        // console.log(person.name);
+
+        // let book = {
+        //     year_:2017,
+        //     edition:1
+        // }
+        // Object.defineProperty(book,'year',{
+        //     get(){
+        //         return this.year_
+        //     },
+        //     set(newValue){
+        //         if(newValue > 2017){
+        //             this.year_ = newValue;
+        //             this.edition = newValue - 2017
+        //         }
+        //     }
+        // })
+
+        // console.log(book.year);
+        // book.year = new Date().getFullYear();
+        // console.log(book);
+
+
+        // let book = {
+          
+        // };
+        // Object.defineProperties(book,
+        //   {
+        //    year_:{
+        //     value: 2017
+        //    },
+        //     edition:{
+        //         value: 1
+        //     },
+        //     year:{
+        //         get(){
+        //             return this.year_;
+        //         },
+        //         set(newValue){
+        //             if(newValue > 2017){
+        //                 this.year_ = newValue;
+        //                 this.edition += newValue - 2017
+        //             }
+        //         }
+        //     }
+        //   }
+        //    )
+
+        //     let description = Object.getOwnPropertyDescriptor(book,'year');
+        //     console.log(description);
+
+            let dest,src,result;
+
+            // dest = {
+            //     set id(x){
+            //         console.log(x)
+            //     }
+            // };src = {id:'src'};
+           // result = Object.assign(dest,{id:'src1',a:'foo'},{id:'src2',b:'baz'});
+          //  console.log(result);
+
+            // dest = {};
+            // src = {
+            //     a: {},
+            //     get b(){
+            //         throw new Error();
+            //     }
+            // };
+            // try{
+            //     Object.assign(dest,src)
+            // }catch(e){
+            //     console.log(e)
+            // }
+            
+            // console.log(dest);
+            // console.log(dest.a === src.a)
+          
+            // function recursivelyCheckEqual(x,...rest){
+            //    // return Object.is(x,rest[0])&&(rest.length<2 || recursivelyCheckEqual(...rest))
+            //    let len = rest.length;
+            //     if(rest.length<2){
+            //        return  Object.is(x,rest[0])
+            //     }else{
+            //         return  recursivelyCheckEqual(...rest)
+            //     }
+            // }
+
+            // console.log(recursivelyCheckEqual(1,1,1,1,1,1,1))
+
+            // const nameKey = 'name';
+            // const ageKey ='age';
+            // let uniqueToken = 0;
+
+            // function getUniqueKey(key){
+            //     return `${key}_${uniqueToken++}`
+            // }
+
+            //     let obj = { 
+            //         [getUniqueKey(nameKey)]: 'yuanyuan',
+            //         [getUniqueKey(ageKey)]: '18'
+            //     }
+            //     console.log(obj)
+
+            // let person ={
+            //     name_:'',
+            //     get name(){
+            //         return this.name_
+            //     },
+            //     set name(newValue){
+            //         this.name_ = newValue;
+            //     },
+            //     sayName(){
+            //         console.log(`My name is ${this.name_}`)
+            //     }
+            // }
+            // person.name  = 'YuanYuan';
+            // console.log(person.sayName());
+
+            // let {length}  ='foobarbaz';
+            // console.log(length);
+
+            //嵌套解构
+            // let person = {
+            //     name: 'YuanYuan',
+            //     age: 18,
+            //     job: {
+            //         title: 'yanyuan'
+            //     }
+            // }
+
+        //     let personCopy = {};
+        //    // let {job:{title}}  = person;
+        //     ({name:personCopy.name,age:personCopy.age,job:{title:personCopy.job.title}} = person);
+        //     person.job.title = '程序员';
+        //     console.log(person);
+        //     console.log(personCopy)
+
+
+        //解构赋值
+
+        // let person = {
+        //     name: 'Yuanyuan',
+        //     age:18
+        // }
+
+        // function printPerson(foo,{name,age},bar){
+        //     console.log(arguments);
+        //     console.log(name,age)
+        // }
+
+        // printPerson('lst',person,'2nd')
+
+        //构造函数
+
+        // function Person(name,age,job){
+            
+        //     this.name = name;
+        //     this.age = age;
+        //     this.job = job;
+        //     this.sayName = function(){
+        //          return this.name;
+        //     }
+        // }
+
+        // let person1 = new Person('YuanYuan',18,'Yanyuan');
+        // console.log(person1.sayName());
+
+        // let o = new Object();
+        // Person.call(o,'YuanYuan',18,'程序员');
+        // console.log(o);
+       
+        // console.log('name' in person1);
+        // let person2 = {};
+        // Object.assign(person2,person1);
+        // console.log(person2);
+        // console.log('person1',person1);
+        // console.log(Object.getOwnPropertyNames(person1));
+
+        // let obj = {
+        //     foo: 'bar',
+        //     baz: 1,
+        //     qux: {}
+        // }
+
+        // console.log(Object.values(obj))
+
+        // const sym = Symbol();
+        // const  o1 = {
+        //     [sym]: 'foo'
+        // }
+
+        // console.log(Object.keys(o1));
+        // console.log(Object.values(o1));
+        // console.log(Object.entries(o1))
+
+        // function Persom(){}
+        // Persom.prototype = {
+        //     constructor: Persom,
+        //     name: 'yuanyuan',
+        //     age: 18,
+        //     job: 'actor'
+        // }
+
+        // console.log(Persom.prototype.constructor === Persom)
+        // console.log(Persom.prototype.constructor);
+        // Object.defineProperty(Persom,'constructor',{
+        //     enumerable:false,
+        // })
+        // console.log(Object.keys(Persom))
+
+        //原型动态性，重写原型
+        // function Person(){
+            
+        // }
+
+       
+        // // Person.prototype.sayName = function(){
+        // //     console.log('hi')
+        // // }
+        // let friend = new Person();
+        // Person.prototype = {
+        //     sayName: function(){
+        //         console.log('hi')
+        //     }
+        // }
+       
+        // console.log(friend);
+        // console.log(Person.prototype.constructor)
+        // friend.sayName()
+
+
+        // function Father(name){
+        //     this.name = name;
+        //     this.colors = ['red','blue','green'];
+            
+        // }
+        // Father.prototype.sayName = function(){ console.log(this.name)}
+        // function Son(name,age){
+        //     Father.call(this,name);
+        //     this.age = age
+        // }
+        // Son.prototype = new Father();
+        // Son.prototype.sayAge = function(){ console.log(this.age)}
+        // let son = new Son('yuanyuan',18);
+        // son.sayName();
+        // son.sayAge();
+        // console.log(son);
+        // let father = new Father('youting');
+        // father.sayName()
+        // console.log(father)
+
+
+        // function object(o){
+        //     function F(){};
+        //     F.prototype = o;
+        //     return new F()
+        // }
+
+        // let person = {
+        //     name: 'YuanYuan',
+        //     age: 18
+        // }
+        // let obj = new Object(person);
+        // console.log(obj );
+
+
+        // function inheritProperty(subProperty,superProperty){
+        //     let prototype = object(superProperty.prototype);
+        //     prototype.constructor = subProperty;
+        //     subProperty.prototype = prototype;
+
+        // }
+        //寄生式继承
+        // function object(o){
+        //     function F(){};
+        //     F.prototype = o;
+        //     return new F();
+        // }
+        // function createAnother(original){
+        //     let clone = object(original);
+        //     clone.sayHi = function(){
+        //         console.log('HI')
+        //     };
+        //     return clone;
+        // }
+        // let obj1 = {
+        //     a:1, b:2,c:3,d:{aa:4,bb:5}
+        // }
+        // let obj2 = new object(obj1);
+        // console.log(obj2);
+
+        // let obj3 = new createAnother(obj1);
+        // console.log(obj3)
+
+
+        //组合式继承
+        // function object(o){
+        //     function F(){};
+        //     F.prototype = o;
+        //     return new F();
+        // }
+
+        // function inheritProperty(son,father){
+        //     let prototype =object(father.prototype);
+        //     prototype.constructor = son;
+        //     son.prototype = prototype;
+        // }
+        // function Father(name){
+        //     this.name = name;
+        //     this.colors = ['yellow','blue','red']
+        // }
+        // Father.prototype.sayName = function(){
+        //     consoe.log(this.name)
+        // }
+        // function Son(age,name){
+        //     Father.call(this,name);  //盗用构造函数继承，继承实例属性
+        //     this.age = age
+        // }
+
+       // Son.prototype = new Father();   //原型链继承，继承原型上的属性和方法
+
+        //Son.prototype.constructor = Son;   //=构造函数指向Son
+
+    //    inheritProperty(Son,Father);
+
+    //     let son = new Son(18,'yuanyuan');
+    //     console.log(son.__proto__);
+    //     console.log(son.__proto__.__proto__ )
+    //     console.log(Father.prototype)
+    //     console.log(new Father('youting'))
+    //     console.log(new Son(18,'yuanyuan'))
+
+          </script>
+</body>
+</html>

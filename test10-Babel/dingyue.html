@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>发布-订阅模式（观察模式）</title>
+</head>
+<body>
+    <script>
+        class Publisher {
+            constructor(){
+                this.clientList = {}
+            };
+            listen(key,fn){
+                if(!this.clientList[key]){
+                    this.clientList[key] = []
+                }
+               this.clientList[key].push(fn)
+            };
+            trigger(){
+                var key = Array.prototype.shift.call(arguments),
+                fns = this.clientList[key];
+                
+                if(!fns || fns.length == 0){
+                    return false;
+                }
+                for(var i = 0,fn;fn = fns[i++]; ){
+                   fn.apply(this,arguments);
+                }
+            };
+            remove(key,fn){
+                var fns = this.clientList[key];
+                const index = fns.indexOf(fn);
+                if(index !==-1){
+                    fns.splice(index,1)
+                }
+                // if(!fns || fns.length === 0){
+                //     return false
+                // }
+                // if(!fn){
+                //     fns && (fns.length = 0);
+                // }else{
+                //     for(var i =fns.length -1;i>=0;i--){
+                //         fns.splice(i,1);
+                //     }
+                // }
+
+            };
+            once(key,fn){
+                const wrapper = (...args)=>{
+                    fn(...args);
+                    this.remove(key,wrapper)
+                }
+                this.listen(key,arguments)
+            }
+        }
+
+        class Watcher {
+            constructor(){
+                Publisher.target = this;
+            }
+        }
+
+        var publisher = new Publisher();
+        publisher.listen('squareMeter88',fn1 =function(price){
+            console.log('price',price);
+        });
+        publisher.listen('squareMeter110',fn2 = function(price){
+            console.log('price',price);
+        });
+        publisher.trigger('squareMeter88',200000);
+        console.log(publisher.clientList);
+       // publisher.remove('squareMeter110',fn2);
+        var token = publisher.once('squareMeter110', (...args) => {
+            console.log(...args);
+        });
+        publisher.listen('squareMeter110',fn2 = function(price){
+            console.log('price',price);
+        });
+         console.log(publisher.clientList);
+        //new Watcher();
+       // console.log(publisher.Publisher.target)
+
+
+       class EventEmitter {
+        constructor(){
+            this.hander = {}
+        };
+        on(eventName,cb){
+            if(!this.hander[eventName]){
+                this.hander[eventName] = []
+            }
+            return this.hander[eventName].push(cb)
+        };
+        emit(){
+            var key = Arrary.prototype.shift.call(arguments);
+             fns = this.clientList[key];
+            // for(var i = 0,fn;fn=fns[i++];){
+            //     fn.apply(this,arguments);
+            // }
+            fns.forEach((callback)=>{
+                callback.apply(...arguments)
+            })
+        };
+        remove(key,fn){
+            var fns = this.clientList[key];
+            var index = fns.indexOf(fn);
+            if(index!==-1){
+                fns.splice(index,1)
+            }
+        };
+        //为时间注册单次监听
+        onece(eventName,cb){
+            const wrapper = ()=>{
+                cb(...arguments)
+                this.remove(eventName,wrapper)
+            }
+            this.on(eventName,wrapper)
+        }
+       }
+    </script>
+</body>
+</html>

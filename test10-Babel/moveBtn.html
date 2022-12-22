@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="ball">
+        <div style="position:absolute;width:50px;height:50px;background-color: #000;"></div>
+    </div>
+    
+    输入小球移动后的位置:<input id="pos"/>
+    <button id="moveBtn">开始移动</button>
+    <script type="text/javascript">
+        var ball = document.getElementById("ball");
+        var pos = document.getElementById("pos");
+        var moveBtn = document.getElementById("moveBtn");
+
+        moveBtn.onclick = function(){
+        var keyframes = [
+        { 
+            transform: 'translateY(-1000px) scaleY(2.5) scaleX(.2)', 
+            transformOrigin: '50% 0',
+            filter: 'blur(40px)',
+            opacity: 0 
+        },
+        { 
+            transform: 'translateY(0) scaleY(1) scaleX(1)',
+            transformOrigin: '50% 50%',
+            filter: 'blur(0)',
+            opacity: 1 
+        }
+        ];
+        var options = {
+            iterations: Infinity,
+            iterationStart: 0,
+            direction: 'alternate',
+            duration: 1000,
+            fill: 'forwards',
+            easing: 'ease-out',
+        };
+        ball.animate(keyframes, options);
+
+        var date1= new Date().getFullYear().toString();
+        var date2 = new Date() - new Date(date1);
+        var date3 = new Date(new Date().getFullYear().toString()+'/01/01').getDay();
+        var date4 = Math.ceil(date2/(24*60*60*1000));
+        console.log(Math.ceil(date2/(24*60*60*1000)));
+        console.log(Math.ceil((date4+date3)/7));
+          // ball.animate({left:['0px','200px']},{left:pos.value+'px',direction:'normal',delay:1000});
+            //animate.start('left',pos.value,1000,'strongEaseOut')
+        }
+    </script>
+</body>
+</html>

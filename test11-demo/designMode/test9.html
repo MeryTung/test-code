@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    //    var plugin = (function(){
+    //      var plugin = document.createElement("embed");
+    //      plugin.style.display = 'none';
+
+    //      plugin.type = 'application/txftn-webkit';
+    //      plugin.sign = function(){
+    //         console.log('开始文件扫描')
+    //      }
+    //      plugin.pause = function(){
+    //         console.log('暂停文件上传')
+    //      }
+    //      plugin.uploading = function(){
+    //         console.log('开始文件上传')
+    //      }
+    //      plugin.del = function(){ console.log('删除文件上传')}
+    //      plugin.done = function(){ console.log('文件上传完成')}
+    //      document.body.appendChild(plugin)
+    //      return plugin
+    //    })()
+    var each = function(obj,callback){
+         var value,
+             i = 0,
+            length = obj.length,
+            isArray = isArraylike(obj);
+            if(isArray){
+                for(;i< length;i++){
+                    callback.call(obj[i],i,obj[i])
+                }
+            }else{
+                for(i in obj){
+                    value = callback.call(obj[i],i,obj[i])
+                }
+            }
+            return obj
+    }
+    var appendDiv = function(data){
+        each(data,function(i,n){
+            var div = document.createElement('div');
+            div.innerHTML = n ;
+            document.body.appendChild(div)
+        })
+    }
+
+
+    </script>
+</body>
+</html>

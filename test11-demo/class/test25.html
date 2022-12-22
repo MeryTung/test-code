@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>web socket</title>
+</head>
+<body>
+  <script>
+    let socket = new WebSocket("ws://www.example.com/server.php");
+
+    let stringData = 'hello world';
+    let arrayBufferData = Uint8Array.from(['f','o','o']);
+    let blobData = new Blob(['f','o','o']);
+
+    console.log(socket)
+    if(socket.readyState ==1){
+        socket.send(stringData);
+        socket.send(arrayBufferData.buffer);
+        socket.send(blobData);
+        socket.onmessage = function(event){
+        console.log(event)
+     }
+    }
+   
+     
+    //socket.close();
+   
+  </script>  
+</body>
+</html>
